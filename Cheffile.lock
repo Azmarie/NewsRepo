@@ -1,6 +1,7 @@
 SITE
   remote: https://supermarket.getchef.com/api/v1
   specs:
+    apt (6.1.4)
     ark (3.1.0)
       build-essential (>= 0.0.0)
       seven_zip (>= 0.0.0)
@@ -16,7 +17,10 @@ SITE
     seven_zip (2.0.2)
       windows (>= 1.2.2)
     windows (4.0.1)
+    yarn (0.4.0)
+      apt (>= 0.0.0)
 
 DEPENDENCIES
   nodejs (~> 5.0.0)
+  yarn (~> 0.4.0)
 

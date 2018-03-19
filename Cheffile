@@ -6,6 +6,7 @@ site 'https://supermarket.getchef.com/api/v1'
 # cookbook 'chef-client'
 
 cookbook 'nodejs', '~> 5.0.0'
+cookbook 'yarn', '~> 0.4.0'
 
 # cookbook 'rvm',
 #   :git => 'https://github.com/fnichol/chef-rvm'
