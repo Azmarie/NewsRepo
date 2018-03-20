@@ -71,6 +71,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     npm i -g n
     n 8.9.0
     npm i -g npm@latest
-    npm i -g yo generator-react-fullstack
   SHELL
+
+  config.vm.provision "file", source: "./react-fullstack", destination: "react-fullstack"
 end
