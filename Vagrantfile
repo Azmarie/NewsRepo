@@ -50,9 +50,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     cloudstack.security_group_names = ['CMPT 470 firewall']
   end
 
-  # config.vm.provision :shell, :inline => "sudo apt-get update -y"
-  # config.vm.provision :shell, :inline => "gem install berkshelf"
-
   # config.berkshelf.enabled = true
   # config.berkshelf.berksfile_path = './Berksfile'
 
@@ -65,10 +62,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "baseconfig"
     chef.add_recipe "nodejs"
     chef.add_recipe "yarn"
-  
 
     #chef.channel = "stable"
     #chef.version = "12.10.24"
   end
 
+  config.vm.provision "shell", inline: <<-SHELL
+    npm i -g n
+    n 8.9.0
+    npm i -g npm@latest
+    npm i -g yo generator-react-fullstack
+  SHELL
 end
