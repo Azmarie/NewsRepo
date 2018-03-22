@@ -15,7 +15,7 @@ function Home({ news }) {
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <section className={s.newsSection}>
+        <section className={s.newsSection + ' ' + s.selectedNews}>
           <h2 className={s.title}>Selected News</h2>
           <ul className={s.news}>
             {news.map((item, index) => (
@@ -31,10 +31,10 @@ function Home({ news }) {
         </section>
       </div>
       <div className={s.container}>
-        <section className={s.newsSection}>
+        <section className={s.newsSection + ' ' + s.hotNews}>
           <h2 className={s.title}>Hot News</h2>
         </section>
-        <section className={s.newsSection}>
+        <section className={s.newsSection + ' ' + s.hotTopics}>
           <h2 className={s.title}>Hot Topics</h2>
         </section>
       </div>
