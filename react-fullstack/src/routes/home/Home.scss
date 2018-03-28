@@ -6,7 +6,13 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.container, .mainnews {
+.mainnews {
+  display: inline-block;
+  margin-bottom: 20px;
+  margin-right: 15px;
+}
+
+.container {
   display: inline-block;
   margin-bottom: 20px;
   margin-right: 15px;
@@ -15,7 +21,7 @@
 .root {
   background-color: #f6f6f6;
   position: relative;
-  width: 80%;
+  width: 100%;
   padding: 0 10%;
 }
 
@@ -23,6 +29,8 @@
 .leftpart {
   vertical-align: top;
   width: 58%;
+  display:inline-block;
+  height: 100%;
 }
 
 //selected news

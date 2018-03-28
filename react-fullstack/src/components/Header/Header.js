@@ -19,7 +19,7 @@ function Header() {
       <div className={s.container}>
         <div>
           <Link className={s.brand} to="/">
-            <img src={require('./logo-small.png')} width="266" height="64" alt="NewsRepo" />
+            <img src={require('./logo-small.png')} width="225" alt="NewsRepo" />
             <span className={s.brandTxt}></span>
           </Link>
           <Navigation className={s.nav} />

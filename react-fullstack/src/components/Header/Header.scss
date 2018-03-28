@@ -18,9 +18,8 @@ $brand-color: #fff;
 }
 
 .brand {
-  color: color($brand-color lightness(+10%));
-  margin-left: 20px;
-  font-size: 1.75em; /* ~28px */
+  // color: color($brand-color lightness(+10%));
+  margin-left: 10%;
 }
 
 .brandTxt {
