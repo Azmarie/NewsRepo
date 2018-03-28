@@ -19,8 +19,8 @@ function Header() {
       <div className={s.container}>
         <Navigation className={s.nav} />
         <Link className={s.brand} to="/">
-          <img src={require('./logo-small.png')} width="38" height="38" alt="React" />
-          <span className={s.brandTxt}>News Repo</span>
+          <img src={require('./logo-small.png')} width="266" height="64" alt="NewsRepo" />
+          <span className={s.brandTxt}></span>
         </Link>
       </div>
     </div>
