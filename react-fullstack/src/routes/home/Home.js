@@ -6,43 +6,43 @@ function Home({ news }) {
   news = news.concat([
     {
       link: '/foo',
-      title: 'foobar1',
+      title: 'Lorem ipsum',
       desc: 'foobar desc text',
       contentSnippet: '<div>foobar</div>'
     },
     {
       link: '/foo',
-      title: 'foobar1',
+      title: 'Lorem ipsum',
       desc: 'foobar desc text',
       contentSnippet: '<div>foobar</div>'
     },
     {
       link: '/foo',
-      title: 'foobar1',
+      title: 'Lorem ipsum',
       desc: 'foobar desc text',
       contentSnippet: '<div>foobar</div>'
     },
     {
       link: '/foo',
-      title: 'foobar1',
+      title: 'Lorem ipsum',
       desc: 'foobar desc text',
       contentSnippet: '<div>foobar</div>'
     },
     {
       link: '/foo',
-      title: 'foobar1',
+      title: 'Lorem ipsum',
       desc: 'foobar desc text',
       contentSnippet: '<div>foobar</div>'
     },
     {
       link: '/foo',
-      title: 'foobar1',
+      title: 'Lorem ipsum',
       desc: 'foobar desc text',
       contentSnippet: '<div>foobar</div>'
     },
     {
       link: '/foo',
-      title: 'foobar1',
+      title: 'Lorem ipsum',
       desc: 'foobar desc text',
       contentSnippet: '<div>foobar</div>'
     }
@@ -56,17 +56,17 @@ function Home({ news }) {
 
   return (
     <div className={s.root + ' ' + s.font}>
-      <div className={s.container + ' ' + s.leftpart}>
-        <div className={s.mainnews}>
+      <div className={s.mainnews + ' ' + s.leftpart}>
           <ul className={s.news}>
             {news.map((item, index) => (
-              <li key={index} className={s.newsItem}><h2>
-                <a href={item.link} className={s.newsTitle}>{item.title}</a></h2>
+              <li key={index} className={s.newsItem}>
+                <h2>
+                  <a href={item.link} className={s.newsTitle}>{item.title}</a>
+                </h2>
                 <p className={s.newsDesc}>{item.desc}</p>
               </li>
             ))}
           </ul>
-        </div>
       </div>
       <div className={s.container}>
         <div className={s.hotNews}>
