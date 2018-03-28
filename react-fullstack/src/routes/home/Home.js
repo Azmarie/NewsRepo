@@ -27,6 +27,24 @@ function Home({ news }) {
       title: 'foobar1',
       desc: 'foobar desc text',
       contentSnippet: '<div>foobar</div>'
+    },
+    {
+      link: '/foo',
+      title: 'foobar1',
+      desc: 'foobar desc text',
+      contentSnippet: '<div>foobar</div>'
+    },
+    {
+      link: '/foo',
+      title: 'foobar1',
+      desc: 'foobar desc text',
+      contentSnippet: '<div>foobar</div>'
+    },
+    {
+      link: '/foo',
+      title: 'foobar1',
+      desc: 'foobar desc text',
+      contentSnippet: '<div>foobar</div>'
     }
 
   ]);
@@ -42,8 +60,8 @@ function Home({ news }) {
         <div className={s.mainnews}>
           <ul className={s.news}>
             {news.map((item, index) => (
-              <li key={index} className={s.newsItem}>
-                <a href={item.link} className={s.newsTitle}>{item.title}</a>
+              <li key={index} className={s.newsItem}><h2>
+                <a href={item.link} className={s.newsTitle}>{item.title}</a></h2>
                 <p className={s.newsDesc}>{item.desc}</p>
               </li>
             ))}
@@ -53,13 +71,13 @@ function Home({ news }) {
       <div className={s.container}>
         <div className={s.hotNews}>
           <h2 className={s.title}>Hot News</h2>
-          <ul className={s.news}>
+          <ol>
             {news.map((item, index) => (
-              <li key={index} className={s.newsItem}>
-                <a href={item.link} className={s.newsTitle}>{item.title}</a>
+              <li key={index}>
+                <h3><a href={item.link}>{item.title}</a></h3>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
         <div className={s.aboutus}>
           <h2 className={s.title}>About Us</h2>

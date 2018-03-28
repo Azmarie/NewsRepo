@@ -26,10 +26,10 @@ function Header() {
         </div>
         <div className={s.mainmenu}>
           <ul>
-            <li><a href="#Category">Category1</a></li>
-            <li><a href="#Category">Category2</a></li>
-            <li><a href="#Category">Category3</a></li>
-            <li><a href="#Category">Category4</a></li>
+            <li><a href="#Category">Category 1</a></li>
+            <li><a href="#Category">Category 2</a></li>
+            <li><a href="#Category">Category 3</a></li>
+            <li><a href="#Category">Category 4</a></li>
           </ul>
         </div>
       </div>
