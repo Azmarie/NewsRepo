@@ -26,10 +26,10 @@ function Header() {
         </div>
         <div className={s.mainmenu}>
           <ul>
-            <li><Link className={s.link} to="/Category1">Category 1</Link></li>
-            <li><Link className={s.link} to="/Category2">Category 2</Link></li>
-            <li><Link className={s.link} to="/Category3">Category 3</Link></li>
-            <li><Link className={s.link} to="/Category4">Category 4</Link></li>
+            <li><a href="#Category">Category1</a></li>
+            <li><a href="#Category">Category2</a></li>
+            <li><a href="#Category">Category3</a></li>
+            <li><a href="#Category">Category4</a></li>
           </ul>
         </div>
       </div>

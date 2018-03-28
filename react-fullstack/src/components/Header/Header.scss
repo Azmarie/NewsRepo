@@ -19,8 +19,7 @@ $brand-color: #fff;
 
 .brand {
   color: color($brand-color lightness(+10%));
-  text-decoration: none;
-  padding: 30px;
+  margin-left: 20px;
   font-size: 1.75em; /* ~28px */
 }
 
@@ -32,7 +31,6 @@ $brand-color: #fff;
   float: right;
   margin-top: 6px;
 }
-
 
 .mainmenu {
   background-color: #6a8;
@@ -49,6 +47,7 @@ $brand-color: #fff;
 }
 
 .mainmenu ul {
+  text-decoration: none;
   margin-left:50%;
   list-style-type: none;
   font-size: 17px;
@@ -64,6 +63,7 @@ $brand-color: #fff;
 }
 
 .mainmenu ul li a {
+  text-decoration: none;
   color: #fff;
   padding: 0 20px;
   display: block;
