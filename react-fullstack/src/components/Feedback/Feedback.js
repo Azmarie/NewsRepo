@@ -14,9 +14,6 @@ import s from './Feedback.scss';
 function Feedback() {
   return (
     <div className={s.root}>
-      <div className={s.container}>
-        <a className={s.link} href="#" >Info Section</a>
-      </div>
     </div>
   );
 }

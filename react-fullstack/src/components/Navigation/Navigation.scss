@@ -1,5 +1,5 @@
 .root {
-
+  margin-right:13%;
 }
 
 .link {
@@ -12,11 +12,11 @@
 .link,
 .link:active,
 .link:visited {
-  color: rgba(255, 255, 255, .6);
+  color: rgba(5, 5, 5, .6);
 }
 
 .link:hover {
-  color: rgba(255, 255, 255, 1);
+  color: rgba(5, 5, 5, 1);
 }
 
 .highlight {
@@ -24,7 +24,7 @@
   margin-left: 8px;
   border-radius: 3px;
   background: rgba(0, 0, 0, .15);
-  color: #fff;
+  color: rgba(5, 5, 5, .6);
 }
 
 .highlight:hover {
@@ -34,36 +34,3 @@
 .spacer {
   color: rgba(255, 255, 255, .3);
 }
-
-.mainmenu {
-    background-color: #6a8;
-    margin-top: 10px;
-    height: 50px;
-    width: 100%;
-}
-
-    .mainmenu ul {
-        float: right;
-        font-size: 17px;
-    }
-
-        .mainmenu ul li {
-            border-right: 1px solid #a3ccb7;
-            float: left;
-        }
-
-            .mainmenu ul li:first-child {
-                border-left: 1px solid #a3ccb7;
-            }
-
-            .mainmenu ul li a {
-                color: #fff;
-                padding: 0 20px;
-                display: block;
-                height: 50px;
-                line-height: 50px;
-            }
-
-                .mainmenu ul li a:hover {
-                    background-color: #a3ccb7;
-                }

@@ -15,13 +15,23 @@ import Navigation from '../Navigation';
 
 function Header() {
   return (
-    <div className={s.root}>
+    <div className={s.root + ' ' + s.font}>
       <div className={s.container}>
-        <Navigation className={s.nav} />
-        <Link className={s.brand} to="/">
-          <img src={require('./logo-small.png')} width="266" height="64" alt="NewsRepo" />
-          <span className={s.brandTxt}></span>
-        </Link>
+        <div>
+          <Link className={s.brand} to="/">
+            <img src={require('./logo-small.png')} width="266" height="64" alt="NewsRepo" />
+            <span className={s.brandTxt}></span>
+          </Link>
+          <Navigation className={s.nav} />
+        </div>
+        <div className={s.mainmenu}>
+          <ul>
+            <li><Link className={s.link} to="/Category1">Category 1</Link></li>
+            <li><Link className={s.link} to="/Category2">Category 2</Link></li>
+            <li><Link className={s.link} to="/Category3">Category 3</Link></li>
+            <li><Link className={s.link} to="/Category4">Category 4</Link></li>
+          </ul>
+        </div>
       </div>
     </div>
   );

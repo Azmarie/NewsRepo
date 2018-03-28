@@ -1,33 +1,44 @@
 @import '../../components/variables.scss';
 
 .root {
-  padding-left: 20px;
-  padding-right: 20px;
+  // padding-left: 20px;
+  // padding-right: 20px;
+  background-color: #f6f6f6;
+  position: relative;
+  width: 80%;
+  padding: 0 10%;
 }
 
-.selectedNews {
-  height: 750px;
-  top: -352px;
-  width: 1000px;
+.leftpart {
+  vertical-align: top;
+  width: 62.5%;
 }
+
+.mainnews {
+  height: 100%;
+  background-color: #fff;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 
 .hotNews {
-  height: 350px;
-  width: 395px;
+  background-color: #fff;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-.hotTopics {
-  height: 398px;
-}
-
-.newsSection {
-  border: 1px solid black;
-  position: relative;
+.aboutus {
+  background-color: #fff;
+  max-width: 300px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .container {
   display: inline-block;
   margin: 0 auto;
+  margin-right: 15px;
 }
 
 .news {
