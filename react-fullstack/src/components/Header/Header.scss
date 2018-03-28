@@ -20,6 +20,7 @@ $brand-color: #fff;
 .brand {
   color: color($brand-color lightness(+10%));
   text-decoration: none;
+  padding: 30px;
   font-size: 1.75em; /* ~28px */
 }
 

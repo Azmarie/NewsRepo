@@ -12,6 +12,13 @@
 .leftpart {
   vertical-align: top;
   width: 62.5%;
+  margin-top: 10px;
+}
+
+.title {
+  font-size: 25px;
+  color: #6a8;
+  margin: 15px 0 10px;
 }
 
 .mainnews {
@@ -33,6 +40,29 @@
   max-width: 300px;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.info{
+  line-height: 2em;
+}
+.email {
+  text-align: center;
+}
+
+.email svg {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.email a {
+  color: #6a8;
+  text-decoration: none;
+  font-family: Consolas;
+  letter-spacing: 1.25px;
+}
+
+.email a:hover {
+  color: #a3ccb7;
 }
 
 .container {
