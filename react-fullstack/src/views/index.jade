@@ -9,7 +9,32 @@ html(class="no-js", lang="")
     link(rel="NewsRepo-icon", href="../img/favicon-32.ico")
     link(href='../public/css/style.css', rel='stylesheet')
     style.
-        .foobar { }
+      .newsDesc {
+        line-height: 1.5em;
+        height: 4.5em;
+        overflow: auto;
+        margin: 5px 0 0;
+        color: #777;
+        display: block;
+      }
+      .newsItem {
+        list-style-type: none;
+        height: 100%;
+        background-color: #fff;
+        padding-left: 0;
+        padding: 20px 24px;
+        border-bottom: 2px solid #f6f6f6;
+      }
+      .newsItem h2 {
+        max-width: 75%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      li {
+        list-style-type: none;
+      }
+
     style#css!= css
   body
     #app!= body
@@ -23,9 +48,9 @@ html(class="no-js", lang="")
         $.getJSON('/news', (res) => {
             console.log(res);
             var list = res.map(function(r) {
-                return React.DOM.li({className: ''}, [
+                return React.DOM.li({className: 'newsItem'}, [
                     React.DOM.h2({className: ''}, React.DOM.a({className: ''}, r.title)),
-                    React.DOM.p({className: ''}, r.desc)
+                    React.DOM.p({className: 'newsDesc'}, r.desc)
                 ]);
             });
             React.render(React.DOM.ul({className: ''}, list), document.getElementById('mainnews'));
