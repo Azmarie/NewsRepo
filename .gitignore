@@ -2,3 +2,5 @@
 tmp/
 
 .DS_Store
+react-fullstack/node_modules
+react-fullstack/src/server/node_modules
