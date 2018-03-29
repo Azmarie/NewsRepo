@@ -3,81 +3,36 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Home.scss';
 
 function Home({ news }) {
-  news = news.concat([
-    {
-      link: '/foo',
-      title: 'Lorem ipsum',
-      desc: 'foobar desc text',
-      contentSnippet: '<div>foobar</div>'
-    },
-    {
-      link: '/foo',
-      title: 'Lorem ipsum',
-      desc: 'foobar desc text',
-      contentSnippet: '<div>foobar</div>'
-    },
-    {
-      link: '/foo',
-      title: 'Lorem ipsum',
-      desc: 'foobar desc text',
-      contentSnippet: '<div>foobar</div>'
-    },
-    {
-      link: '/foo',
-      title: 'Lorem ipsum',
-      desc: 'foobar desc text',
-      contentSnippet: '<div>foobar</div>'
-    },
-    {
-      link: '/foo',
-      title: 'Lorem ipsum',
-      desc: 'foobar desc text',
-      contentSnippet: '<div>foobar</div>'
-    },
-    {
-      link: '/foo',
-      title: 'Lorem ipsum',
-      desc: 'foobar desc text',
-      contentSnippet: '<div>foobar</div>'
-    },
-    {
-      link: '/foo',
-      title: 'Lorem ipsum',
-      desc: 'foobar desc text',
-      contentSnippet: '<div>foobar</div>'
-    }
+  news = [];
 
-  ]);
 
-  // <span
-  //   className={s.newsDesc}
-  //   dangerouslySetInnerHTML={{ __html: item.contentSnippet }}
-  //   />
+          //<ul className={s.news}>
+          //  {news.map((item, index) => (
+          //    <li key={index} className={s.newsItem}>
+          //      <h2>
+          //        <a href={item.link} className={s.newsTitle}>{item.title}</a>
+          //      </h2>
+          //      <p className={s.newsDesc}>{item.desc}</p>
+          //    </li>
+          //  ))}
+          //</ul>
 
+          //<ol>
+          //  {news.map((item, index) => (
+          //    <li key={index}>
+          //      <h3><a href={item.link}>{item.title}</a></h3>
+          //    </li>
+          //  ))}
+          //</ol>
   return (
     <div className={s.root + ' ' + s.font}>
       <div className={s.mainnews + ' ' + s.leftpart}>
-          <ul className={s.news}>
-            {news.map((item, index) => (
-              <li key={index} className={s.newsItem}>
-                <h2>
-                  <a href={item.link} className={s.newsTitle}>{item.title}</a>
-                </h2>
-                <p className={s.newsDesc}>{item.desc}</p>
-              </li>
-            ))}
-          </ul>
+          <div id="mainnews"></div>
       </div>
       <div className={s.container}>
         <div className={s.hotNews}>
           <h2 className={s.title}>Hot News</h2>
-          <ol>
-            {news.map((item, index) => (
-              <li key={index}>
-                <h3><a href={item.link}>{item.title}</a></h3>
-              </li>
-            ))}
-          </ol>
+          <div id="hotnews"></div>
         </div>
         <div className={s.aboutus}>
           <h2 className={s.title}>About Us</h2>

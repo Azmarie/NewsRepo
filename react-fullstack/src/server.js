@@ -24,6 +24,8 @@ import assets from './assets';
 import { port, auth, analytics } from './config';
 
 const server = global.server = express();
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/mydb";
 
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
@@ -74,6 +76,19 @@ server.use('/graphql', expressGraphQL(req => ({
   rootValue: { request: req },
   pretty: process.env.NODE_ENV !== 'production',
 })));
+
+server.get('/news', (req, res) => {
+  MongoClient.connect(url, function(err, db) {
+      if (err) throw err;
+      var dbo = db.db("mydb");
+      dbo.collection("news").find({}).toArray( function(err, result) {
+          if (err) throw err;
+          //res.setHeader('Content-Type', 'application/json');
+          res.json(result);
+          db.close();
+      });
+  });
+});
 
 //
 // Register server-side rendering middleware

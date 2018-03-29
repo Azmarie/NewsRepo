@@ -7,12 +7,29 @@ html(class="no-js", lang="")
     meta(name="description", description=description)
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="NewsRepo-icon", href="../img/favicon-32.ico")
+    link(href='../public/css/style.css', rel='stylesheet')
+    style.
+        .foobar { }
     style#css!= css
   body
     #app!= body
     script(src=entry)
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.min.js")
     script.
       window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
       ga('create','#{trackingId}','auto');ga('send','pageview')
+    script.
+        $.getJSON('/news', (res) => {
+            console.log(res);
+            var list = res.map(function(r) {
+                return React.DOM.li({className: ''}, [
+                    React.DOM.h2({className: ''}, React.DOM.a({className: ''}, r.title)),
+                    React.DOM.p({className: ''}, r.desc)
+                ]);
+            });
+            React.render(React.DOM.ul({className: ''}, list), document.getElementById('mainnews'));
+        });
+
     if trackingId
       script(src="https://www.google-analytics.com/analytics.js", async=true, defer=true)
