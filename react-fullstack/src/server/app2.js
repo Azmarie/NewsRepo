@@ -6,7 +6,7 @@ var app     = express();
 var fileManager = require('./fileManager');
 
 app.get('/fetch',function(req,res){
-	
+
 	url = 'http://www.cbc.ca/news/technology';
 
 	request(url, function(error,response,html){
@@ -20,7 +20,7 @@ app.get('/fetch',function(req,res){
 
 		  $('span.promo-title.complexlink-target').each(function(){
 		        var data = $(this);
-		        titleP = data.text() + '\n';            
+		        titleP = data.text() + '\n';
 		       //release = data.children().last().children().text();
 
 		        jsonData.title = jsonData.title + titleP;
@@ -29,8 +29,8 @@ app.get('/fetch',function(req,res){
 		        //jsonData.release = release;
 
 				console.log(titleP);
-		    })		    
-		  
+		    })
+
 		  $('ul.promocollection-list > li.promo').each(function(){
 		  		var data = $(this);
 		  		linkP = data.first().html() + '\n';
@@ -53,5 +53,3 @@ app.get('/fetch',function(req,res){
 app.listen('8081');
 console.log('listing on port 8081');
 exports = module.exports = app;
-
-

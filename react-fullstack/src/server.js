@@ -1,12 +1,3 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import 'babel-polyfill';
 import path from 'path';
 import express from 'express';
@@ -22,10 +13,15 @@ import schema from './data/schema';
 import Router from './routes';
 import assets from './assets';
 import { port, auth, analytics } from './config';
+import fs from 'fs';
+import cron from 'node-cron';
+//import newsapi from 'newsapi';
 
 const server = global.server = express();
+var NewsAPI = require('newsapi');
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/mydb";
+var newsapi = new NewsAPI('fca01394a9cc4e05b32d322eac33c1a4');
 
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
@@ -88,6 +84,54 @@ server.get('/news', (req, res) => {
           db.close();
       });
   });
+});
+
+server.get('/fetch', (req, res) => {
+  console.log('fetching ...');
+  //cron.schedule('* * * * *', function(){
+    console.log('scheduled job running ...');
+	  newsapi.v2.topHeadlines({
+	  	sources: 'hacker-news',
+	  	language: 'en'
+	  }).then(response => {
+      console.log('writing file ...');
+	  	response = response.articles;
+
+      fs.writeFile('techNews.json', JSON.stringify(response, null,4), function(err){
+        console.log('write file success!')
+
+	      MongoClient.connect(url, function(err, db) {
+	        if (err) throw err;
+          console.log("Database connected!");
+
+	       	var dbo = db.db("mydb");
+	       	var data = require('./techNews.json');
+	       	dbo.collection("news").insertMany(data, function(err, res) {
+	     	    if (err) throw err;
+	        	  console.log("news inserted");
+	        });
+	        db.close();
+	      });
+	  	});
+	  });
+
+	  console.log('running a task every hour');
+	  //insert techNews file to news collection
+	  // MongoClient.connect(url, function(err, db) {
+	    // if (err) throw err;
+      // console.log("Database connected!");
+//
+	  	// var dbo = db.db("mydb");
+	  	// var data = require('./techNews.json');
+	  	// dbo.collection("news").insertMany(data, function(err, res) {
+	  	   // if (err) throw err;
+	  	   // console.log("news inserted");
+	  	// });
+	  	// db.close();
+	  // });
+  //});
+
+  res.json({});
 });
 
 //
