@@ -94,42 +94,23 @@ server.get('/fetch', (req, res) => {
 	  	sources: 'hacker-news',
 	  	language: 'en'
 	  }).then(response => {
+
       console.log('writing file ...');
 	  	response = response.articles;
-
-      fs.writeFile('techNews.json', JSON.stringify(response, null,4), function(err){
-        console.log('write file success!')
-
-	      MongoClient.connect(url, function(err, db) {
-	        if (err) throw err;
+      console.log(response);
+	    MongoClient.connect(url, function(err, db) {
+	      if (err) throw err;
           console.log("Database connected!");
-
-	       	var dbo = db.db("mydb");
-	       	var data = require('./techNews.json');
-	       	dbo.collection("news").insertMany(data, function(err, res) {
-	     	    if (err) throw err;
-	        	  console.log("news inserted");
-	        });
-	        db.close();
+	      var dbo = db.db("mydb");
+	      dbo.collection("news").insertMany(response, function(err, res) {
+	        if (err) throw err;
+	      	console.log("news inserted");
 	      });
-	  	});
+	      db.close();
+	    });
 	  });
 
 	  console.log('running a task every hour');
-	  //insert techNews file to news collection
-	  // MongoClient.connect(url, function(err, db) {
-	    // if (err) throw err;
-      // console.log("Database connected!");
-//
-	  	// var dbo = db.db("mydb");
-	  	// var data = require('./techNews.json');
-	  	// dbo.collection("news").insertMany(data, function(err, res) {
-	  	   // if (err) throw err;
-	  	   // console.log("news inserted");
-	  	// });
-	  	// db.close();
-	  // });
-  //});
 
   res.json({});
 });

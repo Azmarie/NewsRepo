@@ -1,5 +1,5 @@
 //instructions to use:
-//need to connect to db with these commands: 
+//need to connect to db with these commands:
 
 //cd C:\Program Files\MongoDB\Server\3.6\bin on windows
 //mongod
@@ -55,37 +55,37 @@ app.set('views', './');
 app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
 
-//Schedule news retrival job-------------------------------------  
+//Schedule news retrival job-------------------------------------
 
 //execute every hour
-// var fetchNews = cron.schedule('* */1 * * *', function(){
+var fetchNews = cron.schedule('* */1 * * *', function(){
 
-// 	newsapi.v2.topHeadlines({
-// 		sources: 'hacker-news',
-// 		language: 'en'
-// 		}).then(response => {
-// 		response = response.articles
-// 		fs.writeFile('techNews.json', JSON.stringify(response, null,4), function(err){
-// 					console.log('write file success!')
-// 		})
-// 	});
+	newsapi.v2.topHeadlines({
+		sources: 'hacker-news',
+		language: 'en'
+		}).then(response => {
+		response = response.articles
+		fs.writeFile('techNews.json', JSON.stringify(response, null,4), function(err){
+					console.log('write file success!')
+		})
+	});
 
-// 	console.log('running a task every hour');
-// 	//insert techNews file to news collection
-// 	MongoClient.connect(url, function(err, db) {
-// 	  	if (err) throw err;
-// 	  	console.log("Database connected!");
-// 		var dbo = db.db("mydb");
-// 		var data = require('./techNews.json');
-// 		dbo.collection("news").insertMany(data, function(err, res) {
-// 		   if (err) throw err;
-// 		   console.log("news inserted");
-// 		});
-// 		db.close();
-// 	}); 	
-// });
+	console.log('running a task every hour');
+	//insert techNews file to news collection
+	MongoClient.connect(url, function(err, db) {
+	  	if (err) throw err;
+	  	console.log("Database connected!");
+		var dbo = db.db("mydb");
+		var data = require('./techNews.json');
+		dbo.collection("news").insertMany(data, function(err, res) {
+		   if (err) throw err;
+		   console.log("news inserted");
+		});
+		db.close();
+	});
+});
 
-//fetchNews.start();
+fetchNews.start();
 
 
 // //DB-------------------------------------
@@ -105,4 +105,4 @@ app.engine('html', ejs.renderFile);
 //createCollection.start();
 
 var server = app.listen(8888, function(){
-});  
+});
