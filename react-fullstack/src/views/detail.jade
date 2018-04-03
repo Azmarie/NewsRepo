@@ -7,6 +7,12 @@ html(class="no-js", lang="")
     meta(name="description", description=description)
     meta(name="viewport", content="width=device-width, initial-scale=1")
     style.
+      .newsTitle {
+        max-width: 75%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
       .newsDesc {
         line-height: 1.5em;
         height: 4.5em;
@@ -16,23 +22,12 @@ html(class="no-js", lang="")
         display: block;
       }
       .newsItem {
-        list-style-type: none;
         height: 100%;
         background-color: #fff;
         padding-left: 0;
         padding: 20px 24px;
         border-bottom: 2px solid #f6f6f6;
       }
-      .newsItem h2 {
-        max-width: 75%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-      li {
-        list-style-type: none;
-      }
-
     style#css!= css
   body
     #app!= body
@@ -44,15 +39,15 @@ html(class="no-js", lang="")
       ga('create','#{trackingId}','auto');ga('send','pageview')
     script.
         $.getJSON('/news', (res) => {
-            console.log(document.getElementById('flag'));
-            var list = res.filter(function(r) {
-              return (!!r.description);
-            }).map(function(r) {
-                return React.DOM.div({className: 'newsItem'}, [
-                    React.DOM.h2({className: ''}, React.DOM.a({className: ''}, r.title)),
-                    React.DOM.p({className: 'newsDesc'}, r.description)
-                ]);
-            });
+            //- console.log(document.getElementById('flag'));
+            //- var list = res.filter(function(r) {
+            //-   return (!!r.description);
+            //- }).map(function(r) {
+            //-     return React.DOM.div({className: 'newsItem'}, [
+            //-         React.DOM.h2({className: ''}, React.DOM.a({className: ''}, r.title)),
+            //-         React.DOM.p({className: 'newsDesc'}, r.description)
+            //-     ]);
+            //- });
             React.render(React.DOM.ul({className: ''}, list), document.getElementById('article'));
         });
 
