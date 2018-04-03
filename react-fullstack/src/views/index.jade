@@ -34,6 +34,9 @@ html(class="no-js", lang="")
       li {
         list-style-type: none;
       }
+      .newsDesc {
+        font: 12px;
+      }
 
     style#css!= css
   body
@@ -47,10 +50,12 @@ html(class="no-js", lang="")
     script.
         $.getJSON('/news', (res) => {
             console.log(res);
-            var list = res.map(function(r) {
+            var list = res.filter(function(r) {
+              return (!!r.description);
+            }).map(function(r) {
                 return React.DOM.li({className: 'newsItem'}, [
                     React.DOM.h2({className: ''}, React.DOM.a({className: ''}, r.title)),
-                    React.DOM.p({className: 'newsDesc'}, r.desc)
+                    React.DOM.p({className: 'newsDesc'}, r.description)
                 ]);
             });
             React.render(React.DOM.ul({className: ''}, list), document.getElementById('mainnews'));
