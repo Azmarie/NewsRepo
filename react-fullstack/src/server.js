@@ -73,6 +73,9 @@ server.use('/graphql', expressGraphQL(req => ({
   pretty: process.env.NODE_ENV !== 'production',
 })));
 
+//
+// Connect MongoDB
+// -----------------------------------------------------------------------------
 server.get('/news', (req, res) => {
   MongoClient.connect(url, function(err, db) {
       if (err) throw err;
@@ -86,10 +89,13 @@ server.get('/news', (req, res) => {
   });
 });
 
-// fetching news
+//
+// Fetching news...
+// -----------------------------------------------------------------------------
+
 server.get('/fetch', (req, res) => {
   console.log('fetching ...');
-  //cron.schedule('* * * * *', function(){
+  cron.schedule('* * * * *', function(){
     console.log('scheduled job running ...');
 	  newsapi.v2.topHeadlines({
 	  	sources: 'hacker-news',
@@ -110,10 +116,9 @@ server.get('/fetch', (req, res) => {
 	      db.close();
 	    });
 	  });
-
-	  console.log('running a task every hour');
-
+	  console.log('running a task every minute');
   res.json({});
+  });
 });
 
 //
@@ -142,7 +147,9 @@ server.get('*', async (req, res, next) => {
       data.css = css.join('');
     });
 
-    // regular expression
+    //
+    // regular expression to filter path
+    //
 
     let template;
     const regex = /^\/article/;

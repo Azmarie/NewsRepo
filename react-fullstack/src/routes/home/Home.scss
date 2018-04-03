@@ -78,10 +78,11 @@
 }
 
 
-//hotnews aboutus
-.hotNews, .aboutus {
+//hotnews removed
+.ourinitiatives, .aboutus {
   max-width: 300px;
   background-color: #fff;
+  line-height: 2em;
   padding: 2px 29px 10px 20px;
   margin: 20px 20px 20px 20px;
 }
@@ -92,30 +93,31 @@
   color: #6a8;
 }
 
-.hotNews ol {
-  list-style-position: outside;
-}
+// .hotNews ol {
+//   list-style-position: outside;
+// }
+//
+// .hotNews ol li {
+//   text-indent: 0.5em;
+//   font-weight: bold;
+// }
+//
+// .hotNews ol li h3 {
+//   max-width: 100%;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   white-space: nowrap;
+// }
+//
+// .hotNews a {
+//   text-decoration: none;
+//   color: #333;
+// }
+//
+// .hotNews a:hover {
+//   color: #6a8;
+// }
 
-.hotNews ol li {
-  text-indent: 0.5em;
-  font-weight: bold;
-}
-
-.hotNews ol li h3 {
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.hotNews a {
-  text-decoration: none;
-  color: #333;
-}
-
-.hotNews a:hover {
-  color: #6a8;
-}
 .email {
   text-align: center;
 }
