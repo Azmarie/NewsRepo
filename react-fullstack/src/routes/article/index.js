@@ -1,5 +1,5 @@
 import React from 'react';
-import Contact from './article';
+import article from './article';
 
 export const path = '/article/:id';
 export const action = async (state) => {
@@ -7,5 +7,5 @@ export const action = async (state) => {
 
   console.log(state);
   //state.context.onSetTitle(title);
-  return <Contact title={"Foobar"} />;
+  return <article title={"Foobar"} />;
 };
