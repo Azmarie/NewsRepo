@@ -86,6 +86,7 @@ server.get('/news', (req, res) => {
   });
 });
 
+// fetching news
 server.get('/fetch', (req, res) => {
   console.log('fetching ...');
   //cron.schedule('* * * * *', function(){
@@ -121,7 +122,7 @@ server.get('/fetch', (req, res) => {
 server.get('*', async (req, res, next) => {
   try {
     let statusCode = 200;
-    const template = require('./views/index.jade');
+    // const template = require('./views/index.jade');
     const data = { title: '', description: '', css: '', body: '', entry: assets.main.js };
 
     if (process.env.NODE_ENV === 'production') {
@@ -141,6 +142,18 @@ server.get('*', async (req, res, next) => {
       data.css = css.join('');
     });
 
+    // regular expression
+
+    let template;
+    const regex = /^\/article/;
+    // console.log(req.path +" "+ regex.test(req.path));
+    if (regex.test(req.path)) {
+      template = require('./views/detail.jade');
+    } else {
+      template = require('./views/index.jade');
+    }
+
+    // console.log(req.path);
     res.status(statusCode);
     res.send(template(data));
   } catch (err) {
