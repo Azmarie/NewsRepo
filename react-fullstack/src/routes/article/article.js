@@ -2,20 +2,23 @@ import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './article.scss';
 
-class article extends Component {
-  // <div className={s.container}>
-  //   <h1>{this.props.title}</h1>
-  //   <p>{100}</p>
-  // </div>
+class Article extends Component {
   render() {
     return (
       <div className={s.root} id='article'>
-        <div id='flag' className={s.noshow} data-id={this.props.id}></div>
+        <div id='article-container'></div>
+        <div id='hidden-info'
+             className={s.noshow}
+             data-id={this.props.articleId}>
+        </div>
       </div>
     );
   }
 }
 
-// Contact.propTypes = { title: PropTypes.string.isRequired };
+Article.propTypes = {
+  title: PropTypes.string.isRequired,
+  articleId: PropTypes.string.isRequired
+};
 
-export default withStyles(article, s);
+export default withStyles(Article, s);

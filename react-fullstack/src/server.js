@@ -15,11 +15,13 @@ import assets from './assets';
 import { port, auth, analytics } from './config';
 import fs from 'fs';
 import cron from 'node-cron';
-//import newsapi from 'newsapi';
 
 const server = global.server = express();
 var NewsAPI = require('newsapi');
 var MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectId;
+var fetchUrl = require('fetch').fetchUrl;
+
 var url = "mongodb://localhost:27017/mydb";
 var newsapi = new NewsAPI('fca01394a9cc4e05b32d322eac33c1a4');
 
@@ -80,7 +82,7 @@ server.get('/news', (req, res) => {
   MongoClient.connect(url, function(err, db) {
       if (err) throw err;
       var dbo = db.db("mydb");
-      dbo.collection("news").find({}).toArray( function(err, result) {
+      dbo.collection("news").find({}).toArray(function(err, result) {
           if (err) throw err;
           //res.setHeader('Content-Type', 'application/json');
           res.json(result);
@@ -89,13 +91,27 @@ server.get('/news', (req, res) => {
   });
 });
 
+server.get('/foobar/:id', (req, res) => {
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
+        dbo.collection("news").find({_id: ObjectId(req.params.id)}).toArray(function(err, result) {
+            if (err) throw err;
+            var article = result[0];
+
+            res.json(article);
+            db.close();
+        });
+    });
+});
+
 //
 // Fetching news...
 // -----------------------------------------------------------------------------
 
 server.get('/fetch', (req, res) => {
   console.log('fetching ...');
-  cron.schedule('* * * * *', function(){
+  //cron.schedule('* * * * *', function(){
     console.log('scheduled job running ...');
 	  newsapi.v2.topHeadlines({
 	  	sources: 'hacker-news',
@@ -116,9 +132,10 @@ server.get('/fetch', (req, res) => {
 	      db.close();
 	    });
 	  });
-	  console.log('running a task every minute');
+
+	  // console.log('running a task every hour');
+
   res.json({});
-  });
 });
 
 //
