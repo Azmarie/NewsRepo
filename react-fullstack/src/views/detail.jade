@@ -7,13 +7,9 @@ html(class="no-js", lang="")
     meta(name="description", description=description)
     meta(name="viewport", content="width=device-width, initial-scale=1")
     style.
-      .newsItem {
-        list-style-type: none;
-        height: 100%;
-        background-color: #fff;
-        padding-left: 0;
-        padding: 20px 24px;
-        border-bottom: 2px solid #f6f6f6;
+      .containter {
+        height : 100%;
+        padding : 20px 20px 20px 24px;
       }
 
     style#css!= css
@@ -27,16 +23,17 @@ html(class="no-js", lang="")
       ga('create','#{trackingId}','auto');ga('send','pageview')
     script.
         const id = document.getElementById('hidden-info').getAttribute('data-id');
-
+        console.log(id);
         $.get('/foobar/' + id, (res) => {
+            console.log(res);
             var date = new Date(res.publishedAt);
             var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
 
-            React.render(React.DOM.div(null, [
+            React.render(React.DOM.div({className:'containter'}, [
               React.DOM.h1(null, res.title),
               React.DOM.div(null, dateString),
               React.DOM.p(null, res.description),
-              React.DOM.a({href: res.url}, "Link")
+              React.DOM.a({href: res.url}, "Read Original")
             ]), document.getElementById('article-container'));
         });
 
