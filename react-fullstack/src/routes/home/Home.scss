@@ -25,7 +25,7 @@
   padding: 0 10%;
 }
 
-//leftpart
+// leftpart
 .leftpart {
   vertical-align: top;
   width: 58%;
@@ -33,36 +33,20 @@
   height: 100%;
 }
 
-//selected news
-.news {
-  list-style-type: none;
-  height: 100%;
-  background-color: #fff;
-  padding-left: 0;
-}
-
-.newsItem {
-  padding: 20px 24px;
-  border-bottom: 2px solid #f6f6f6;
-}
-
 .mainnews li:hover {
   background-color: #f8f8f8;
 }
 
 .newsTitle {
-  font-size: 1.125em;
   display: block;
   color:#333;
   text-decoration: none;
 }
 
-.news a:hover {
-  color: #6a8;
-}
 
 .newsItem h2 {
   max-width: 75%;
+  font-size: 3em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -76,7 +60,6 @@
   color: #777;
   display: block;
 }
-
 
 //hotnews removed
 .ourinitiatives, .aboutus {
@@ -92,31 +75,6 @@
   font-size: 25px;
   color: #6a8;
 }
-
-// .hotNews ol {
-//   list-style-position: outside;
-// }
-//
-// .hotNews ol li {
-//   text-indent: 0.5em;
-//   font-weight: bold;
-// }
-//
-// .hotNews ol li h3 {
-//   max-width: 100%;
-//   overflow: hidden;
-//   text-overflow: ellipsis;
-//   white-space: nowrap;
-// }
-//
-// .hotNews a {
-//   text-decoration: none;
-//   color: #333;
-// }
-//
-// .hotNews a:hover {
-//   color: #6a8;
-// }
 
 .email {
   text-align: center;

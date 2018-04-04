@@ -4,30 +4,6 @@ import s from './Home.scss';
 
 function Home({ news }) {
   news = [];
-  //<ul className={s.news}>
-  //  {news.map((item, index) => (
-  //    <li key={index} className={s.newsItem}>
-  //      <h2>
-  //        <a href={item.link} className={s.newsTitle}>{item.title}</a>
-  //      </h2>
-  //      <p className={s.newsDesc}>{item.desc}</p>
-  //    </li>
-  //  ))}
-  //</ul>
-
-  //<ol>
-  //  {news.map((item, index) => (
-  //    <li key={index}>
-  //      <h3><a href={item.link}>{item.title}</a></h3>
-  //    </li>
-  //  ))}
-  //</ol>
-
-//Take out hotNews div
-  // <div className={s.hotNews}>
-  //   <h2 className={s.title}>Hot News</h2>
-  //   <div id="hotnews" />
-  // </div>
 
   return (
     <div className={s.root + ' ' + s.font}>
