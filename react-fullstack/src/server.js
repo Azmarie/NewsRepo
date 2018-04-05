@@ -22,7 +22,7 @@ var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
 var fetchUrl = require('fetch').fetchUrl;
 
-var url = "mongodb://localhost:27017/mydb";
+var url = "mongodb://admin:password@ds235239.mlab.com:35239/news-repo";
 var newsapi = new NewsAPI('fca01394a9cc4e05b32d322eac33c1a4');
 
 //
@@ -81,7 +81,7 @@ server.use('/graphql', expressGraphQL(req => ({
 server.get('/news', (req, res) => {
   MongoClient.connect(url, function(err, db) {
       if (err) throw err;
-      var dbo = db.db("mydb");
+      var dbo = db.db("news-repo");
       dbo.collection("news").find({}).toArray(function(err, result) {
           if (err) throw err;
           //res.setHeader('Content-Type', 'application/json');
@@ -94,7 +94,7 @@ server.get('/news', (req, res) => {
 server.get('/foobar/:id', (req, res) => {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("mydb");
+        var dbo = db.db("news-repo");
         dbo.collection("news").find({_id: ObjectId(req.params.id)}).toArray(function(err, result) {
             if (err) throw err;
             var article = result[0];
@@ -124,7 +124,7 @@ server.get('/fetch', (req, res) => {
 	    MongoClient.connect(url, function(err, db) {
 	      if (err) throw err;
           console.log("Database connected!");
-	      var dbo = db.db("mydb");
+	      var dbo = db.db("news-repo");
 	      dbo.collection("news").insertMany(response, function(err, res) {
 	        if (err) throw err;
 	      	console.log("news inserted");
