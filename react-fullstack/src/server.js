@@ -20,7 +20,7 @@ const server = global.server = express();
 var NewsAPI = require('newsapi');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
-var fetchUrl = require('fetch').fetchUrl;
+// var fetchUrl = require('fetch').fetchUrl;
 
 var url = "mongodb://admin:password@ds235239.mlab.com:35239/news-repo";
 var newsapi = new NewsAPI('fca01394a9cc4e05b32d322eac33c1a4');
