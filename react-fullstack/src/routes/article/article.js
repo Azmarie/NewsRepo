@@ -14,10 +14,10 @@ class Article extends Component {
       <div className={s.root} id='article'>
       <Grid>
         <Row className="show-grid">
-          <Col xs={12} md={8}>
+          <Col xs={6} md={4}>
             <div id='article-container'></div>
           </Col>
-          <Col xs={6} md={4}>
+          <Col xs={12} md={8}>
             <div id='comment-container'></div>
           </Col>
         </Row>
