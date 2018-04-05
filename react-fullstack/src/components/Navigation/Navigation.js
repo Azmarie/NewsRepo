@@ -5,8 +5,6 @@ import s from './Navigation.scss';
 import Link from '../Link';
 
 function Navigation({ className }) {
-  // <a className={s.link + ' ' + s.font} href="/contact/abcdefg">Contact</a>
-  // <span className={s.spacer}> | </span>
   return (
     <div className={cx(s.root, className)} role="navigation">
       <Link className={s.link + ' ' + s.font} to="/login">Log in</Link>

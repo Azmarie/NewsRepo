@@ -6,10 +6,13 @@ html(class="no-js", lang="")
     title= title
     meta(name="description", description=description)
     meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
+
     style.
-      .containter {
+      .container {
+        display:inline-block;
+        background-color:#fff;
         height : 100%;
-        padding : 20px 20px 20px 24px;
       }
 
     style#css!= css
@@ -29,12 +32,23 @@ html(class="no-js", lang="")
             var date = new Date(res.publishedAt);
             var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
 
-            React.render(React.DOM.div({className:'containter'}, [
-              React.DOM.h1(null, res.title),
-              React.DOM.div(null, dateString),
-              React.DOM.p(null, res.description),
-              React.DOM.a({href: res.url}, "Read Original")
+            React.render(React.DOM.div({className:'container'}, [
+              React.DOM.h2({className:'newsTitle'}, res.title),
+              React.DOM.a({href: res.url}, "Read More"),
+              React.DOM.div({className:'article-date'}, dateString),
+              React.DOM.h6({className: 'newsDesc'}, res.description)
             ]), document.getElementById('article-container'));
+            
+            React.render(React.DOM.div({className:'container'}, [
+              React.DOM.a({href: res.url}, "Meow"),
+              React.DOM.a({href: res.url}, "Meow"),
+              React.DOM.a({href: res.url}, "Meow"),
+              React.DOM.a({href: res.url}, "Meow"),
+              React.DOM.a({href: res.url}, "Meow"),
+              React.DOM.a({href: res.url}, "Meow"),
+              React.DOM.a({href: res.url}, "Meow"),
+            ]), document.getElementById('comment-container'));
+
         });
 
     if trackingId
