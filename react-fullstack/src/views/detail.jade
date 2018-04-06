@@ -15,6 +15,18 @@ html(class="no-js", lang="")
         padding: 20px;
       }
 
+      .comment-form input,
+      .comment-form textarea {
+        display: block;
+      }
+
+      .comment-form > div {
+        margin-bottom: 15px;
+      }
+
+      .comment-form button {
+        float: right;
+      }
     style#css!= css
   body
     #app!= body
@@ -26,29 +38,105 @@ html(class="no-js", lang="")
       ga('create','#{trackingId}','auto');ga('send','pageview')
     script.
         const id = document.getElementById('hidden-info').getAttribute('data-id');
-        console.log(id);
-        $.get('/foobar/' + id, (res) => {
-            console.log(res);
-            var date = new Date(res.publishedAt);
-            var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
-
-            React.render(React.DOM.div({className:'content'}, [
-              React.DOM.h2({className:'newsTitle'}, res.title),
-              React.DOM.a({href: res.url}, "Read More"),
-              React.DOM.div({className:'article-date'}, dateString),
-              React.DOM.h6({className: 'newsDesc'}, res.description)
-            ]), document.getElementById('article-container'));
-            
-            React.render(React.DOM.div({className:'content'}, [
-              React.DOM.p({href: res.url}, "I am going to be --- COMMENT THREAD!!!"),
-              React.DOM.a({href: res.url}, "Meow"),
-              React.DOM.p({href: res.url}, "Meow"),
-              React.DOM.a({href: res.url}, "Meow"),
-              React.DOM.a({href: res.url}, "Meow"),
-              React.DOM.a({href: res.url}, "Meow"),
-            ]), document.getElementById('comment-container'));
-
+        $.get('/detail/' + id, (res) => {
+          var date = new Date(res.publishedAt);
+          var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+          
+          React.render(React.DOM.div({className:'content'}, [
+            React.DOM.h2({className:'newsTitle'}, res.title),
+            React.DOM.a({href: res.url}, "Read More"),
+            React.DOM.div({className:'article-date'}, dateString),
+            React.DOM.h6({className: 'newsDesc'}, res.description)
+          ]), document.getElementById('article-container'));
         });
+
+        var CommentSection = React.createClass({
+          displayName: 'CommentSection',
+
+          getInitialState: function() {
+            return {comments: []};
+          },
+
+          render: function() {
+            return React.DOM.div({className: 'comment-section'}, [
+              React.createElement(CommentForm, {addComment: this.addComment}),
+              React.createElement(CommentList, {comments: this.state.comments})
+            ]);
+          },
+
+          componentDidMount: function() {
+            $.get('/comments/' + id, function(response) {
+              this.setState({comments: response});
+            }.bind(this));
+          },
+          
+          addComment: function(comment) {
+            var comments = this.state.comments.slice();
+            comments.unshift(comment);
+
+            this.setState({comments: comments});
+          }
+        });
+
+        var CommentForm = React.createClass({
+          displayName: 'CommentForm',
+
+          getInitialState: function() {
+            return {name: '', text: ''};
+          },
+        
+          render: function() {
+            return React.DOM.form({className: 'comment-form'}, [
+              React.DOM.div(null, [
+                React.DOM.label(null, 'Please enter your name'),
+                React.DOM.input({onChange: this.handleName, value: this.state.name})
+              ]),
+              React.DOM.div(null, [
+                React.DOM.label(null, 'Please enter your comment'),
+                React.DOM.textarea({onChange: this.handleText, value: this.state.text}),
+                React.DOM.div({onClick: this.handleSubmit}, 'Submit')
+              ]),
+            ]);
+          },
+
+          handleName: function(event) {
+            this.setState({name: event.target.value});
+          },
+
+          handleText: function(event) {
+            this.setState({text: event.target.value});
+          },
+          
+          handleSubmit: function() {
+            var comment = {
+              name: this.state.name,
+              text: this.state.text,
+              articleId: id,
+              publishedAt: (new Date()).getTime()
+            };
+
+            $.post('/comment', comment, function() {
+              this.props.addComment(comment);
+            }.bind(this));
+          }
+        });
+
+        var CommentList = React.createClass({
+          displayName: 'CommentList',
+        
+          render: function() {
+            var comments = this.props.comments.map(function(comment) {
+              return React.DOM.li(null, comment.text);
+            });
+
+            return React.DOM.ul({className: 'comment-list'}, comments);
+          }
+        });
+
+        React.render(React.DOM.div(
+          {className: 'content'},
+          React.createElement(CommentSection)
+        ), document.getElementById('comment-container'));
 
     if trackingId
       script(src="https://www.google-analytics.com/analytics.js", async=true, defer=true)

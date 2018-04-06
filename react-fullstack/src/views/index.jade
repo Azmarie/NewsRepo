@@ -41,7 +41,7 @@ html(class="no-js", lang="")
                 return React.DOM.li({className: 'newsItem'}, [
                     React.DOM.p({className: 'article-date'}, dateString),
                     React.DOM.a({href: '/article/'+rid}, React.DOM.h2({className: 'newsTitle'}, r.title)),
-                    React.DOM.a({href: '/article/'+rid}, 'Read More'),
+                    React.DOM.a({href: '/article/'+rid}, 'Leave a Comment'),
                     React.DOM.p({className: 'newsDesc'}, r.description)
                 ]);
             });
