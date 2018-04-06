@@ -91,7 +91,8 @@ server.get('/news', (req, res) => {
   });
 });
 
-server.get('/foobar/:id', (req, res) => {
+// get article from db
+server.get('/detail/:id', (req, res) => {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("news-repo");
@@ -100,6 +101,35 @@ server.get('/foobar/:id', (req, res) => {
             var article = result[0];
 
             res.json(article);
+            db.close();
+        });
+    });
+});
+
+// GET comments from db
+server.get('/comments/:id', (req, res) => {
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("news-repo");
+        dbo.collection("comments")
+           .find({articleId: req.params.id})
+           .toArray(function(err, result) {
+             if (err) throw err;
+             var comments = result;
+             res.json(comments);
+             db.close();
+        });
+    });
+});
+
+// POST comment to db
+server.post('/comment', (req, res) => {
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("news-repo");
+        dbo.collection("comments").insert(req.body, function(err, result) {
+            if (err) throw err;
+            res.end();
             db.close();
         });
     });
@@ -117,7 +147,6 @@ server.get('/fetch', (req, res) => {
 	  	sources: 'hacker-news',
 	  	language: 'en'
 	  }).then(response => {
-
       console.log('writing file ...');
 	  	response = response.articles;
       console.log(response);
@@ -132,9 +161,7 @@ server.get('/fetch', (req, res) => {
 	      db.close();
 	    });
 	  });
-
 	  // console.log('running a task every hour');
-
   res.json({});
 });
 
