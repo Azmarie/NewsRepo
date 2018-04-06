@@ -9,11 +9,11 @@ html(class="no-js", lang="")
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
 
     style.
-      //- .container {
-      //-   display:inline-block;
-      //-   background-color:#fff;
-      //-   height : 100%;
-      //- }
+      .content {
+        margin:25px 0 0px 25px;
+        background-color:#fff;
+        padding: 20px;
+      }
 
     style#css!= css
   body
@@ -32,14 +32,14 @@ html(class="no-js", lang="")
             var date = new Date(res.publishedAt);
             var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
 
-            React.render(React.DOM.div({className:''}, [
+            React.render(React.DOM.div({className:'content'}, [
               React.DOM.h2({className:'newsTitle'}, res.title),
               React.DOM.a({href: res.url}, "Read More"),
               React.DOM.div({className:'article-date'}, dateString),
               React.DOM.h6({className: 'newsDesc'}, res.description)
             ]), document.getElementById('article-container'));
             
-            React.render(React.DOM.div({className:'container'}, [
+            React.render(React.DOM.div({className:'content'}, [
               React.DOM.p({href: res.url}, "I am going to be --- COMMENT THREAD!!!"),
               React.DOM.a({href: res.url}, "Meow"),
               React.DOM.p({href: res.url}, "Meow"),
