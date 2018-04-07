@@ -53,16 +53,16 @@ server.use(expressJwt({
 server.use(passport.initialize());
 
 server.get('/login/facebook',
-  passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
+passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
 );
 server.get('/login/facebook/return',
-  passport.authenticate('facebook', { failureRedirect: '/login', session: false }),
-  (req, res) => {
-    const expiresIn = 60 * 60 * 24 * 180; // 180 days
-    const token = jwt.sign(req.user, auth.jwt.secret, { expiresIn });
-    res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
-    res.redirect('/');
-  }
+passport.authenticate('facebook', { failureRedirect: '/login', session: false }),
+(req, res) => {
+  const expiresIn = 60 * 60 * 24 * 180; // 180 days
+  const token = jwt.sign(req.user, auth.jwt.secret, { expiresIn });
+  res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
+  res.redirect('/');
+}
 );
 
 //
@@ -80,60 +80,60 @@ server.use('/graphql', expressGraphQL(req => ({
 // -----------------------------------------------------------------------------
 server.get('/news', (req, res) => {
   MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("news-repo");
+    dbo.collection("news").find({}).toArray(function(err, result) {
       if (err) throw err;
-      var dbo = db.db("news-repo");
-      dbo.collection("news").find({}).toArray(function(err, result) {
-          if (err) throw err;
-          //res.setHeader('Content-Type', 'application/json');
-          res.json(result);
-          db.close();
-      });
+      //res.setHeader('Content-Type', 'application/json');
+      res.json(result);
+      db.close();
+    });
   });
 });
 
 // get article from db
 server.get('/detail/:id', (req, res) => {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("news-repo");
-        dbo.collection("news").find({_id: ObjectId(req.params.id)}).toArray(function(err, result) {
-            if (err) throw err;
-            var article = result[0];
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("news-repo");
+    dbo.collection("news").find({_id: ObjectId(req.params.id)}).toArray(function(err, result) {
+      if (err) throw err;
+      var article = result[0];
 
-            res.json(article);
-            db.close();
-        });
+      res.json(article);
+      db.close();
     });
+  });
 });
 
 // GET comments from db
 server.get('/comments/:id', (req, res) => {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("news-repo");
-        dbo.collection("comments")
-           .find({articleId: req.params.id})
-           .sort({publishedAt: -1})
-           .toArray(function(err, result) {
-             if (err) throw err;
-             var comments = result;
-             res.json(comments);
-             db.close();
-        });
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("news-repo");
+    dbo.collection("comments")
+    .find({articleId: req.params.id})
+    .sort({publishedAt: -1})
+    .toArray(function(err, result) {
+      if (err) throw err;
+      var comments = result;
+      res.json(comments);
+      db.close();
     });
+  });
 });
 
 // POST comment to db
 server.post('/comment', (req, res) => {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("news-repo");
-        dbo.collection("comments").insert(req.body, function(err, result) {
-            if (err) throw err;
-            res.end();
-            db.close();
-        });
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("news-repo");
+    dbo.collection("comments").insert(req.body, function(err, result) {
+      if (err) throw err;
+      res.end();
+      db.close();
     });
+  });
 });
 
 //
@@ -143,26 +143,26 @@ server.post('/comment', (req, res) => {
 server.get('/fetch', (req, res) => {
   console.log('fetching ...');
   //cron.schedule('* * * * *', function(){
-    console.log('scheduled job running ...');
-	  newsapi.v2.topHeadlines({
-	  	sources: 'hacker-news',
-	  	language: 'en'
-	  }).then(response => {
-      console.log('writing file ...');
-	  	response = response.articles;
-      console.log(response);
-	    MongoClient.connect(url, function(err, db) {
-	      if (err) throw err;
-          console.log("Database connected!");
-	      var dbo = db.db("news-repo");
-	      dbo.collection("news").insertMany(response, function(err, res) {
-	        if (err) throw err;
-	      	console.log("news inserted");
-	      });
-	      db.close();
-	    });
-	  });
-	  // console.log('running a task every hour');
+  console.log('scheduled job running ...');
+  newsapi.v2.topHeadlines({
+    sources: 'mashable,techcrunch-cn,techcrunch,the-next-web,wired,crypto-coins-news',
+    language: 'en'
+  }).then(response => {
+    console.log('writing file ...');
+    response = response.articles;
+    console.log(response);
+    MongoClient.connect(url, function(err, db) {
+      if (err) throw err;
+      console.log("Database connected!");
+      var dbo = db.db("news-repo");
+      dbo.collection("news").insertMany(response, function(err, res) {
+        if (err) throw err;
+        console.log("news inserted");
+      });
+      db.close();
+    });
+  });
+  // console.log('running a task every hour');
   res.json({});
 });
 
