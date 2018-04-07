@@ -155,6 +155,7 @@ html(class="no-js", lang="")
             };
 
             $.post('/comment', comment, function() {
+              this.setState({name: '', text: ''});
               this.props.addComment(comment);
             }.bind(this));
           }
