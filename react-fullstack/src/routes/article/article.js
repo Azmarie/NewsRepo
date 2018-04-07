@@ -5,9 +5,6 @@ import Link from '../../components/Link'
 // import { render } from 'react-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
 
-// <div id='article-container'></div>
-// <div id='comment-container'></div>
-
 class Article extends Component {
   render() {
     return (
