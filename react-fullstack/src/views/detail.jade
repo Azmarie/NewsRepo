@@ -40,7 +40,7 @@ html(class="no-js", lang="")
       }
 
       .comment-button  {
-        width: 130px;
+        width: 150px;
         padding: 10px;
         margin-top: 20px;
         background: #fff;
@@ -55,11 +55,21 @@ html(class="no-js", lang="")
         font-weight: 500;
       }
 
-      .comment-button:hover {
+      .comment-button-disabled {
+        border: solid 1px #999;
+        color: #999;
+      }
+
+      .comment-button:not(.is-comment-button-disabled):hover {
         color:#fff;
-        
-        
         background-position: 0;
+      }
+
+      .comment-button.is-comment-button-disabled {
+        color: lightgray;
+        cursor: not-allowed;
+        border: solid 1px lightgray;
+        background-image: initial;
       }
 
       .comment {
@@ -84,6 +94,32 @@ html(class="no-js", lang="")
         }
       }
 
+      .comment-form .comment-form-fields {
+        position: relative;
+      }
+
+      .comment-form .comment-form-fields:first-child {
+        margin-bottom: 40px;
+      }
+
+      .comment-form .comment-form-fields:nth-child(2) {
+        margin-bottom: 20px;
+      }
+
+      .comment-title,
+      .comment-button {
+        display: inline-block;
+      }
+
+      .comment-button {
+        float: right;
+      }
+
+      .comment-error {
+        position: absolute;
+        color: lightcoral;
+      }
+
       .article-tag {
         display: inline-block;
         width: 100px;
@@ -101,6 +137,10 @@ html(class="no-js", lang="")
         font-size: 20px;
         color: #6a8;
       }
+
+      .far.fa-plus-square {
+        margin-right: 8px;
+      }
     style#css!= css
   body
     #app!= body
@@ -117,8 +157,11 @@ html(class="no-js", lang="")
           var rx = /(.+?:\/\/.+?)\//;
           return rx.exec(url)[0];
         };
-
+        //show loader
+        //React.render(React.DOM.div(), document.getElementById(''));
+        
         $.get('/detail/' + id, (res) => {
+          //hide loader
           var date = new Date(res.publishedAt);
           document.title = res.title;
           var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
@@ -177,16 +220,29 @@ html(class="no-js", lang="")
           },
 
           render: function() {
+            var nameNodes = [
+                React.DOM.label(null, 'Name'),
+                React.DOM.input({placeholder:'Please enter a name', onChange: this.handleName, value: this.state.name})
+            ];
+            var textNodes = [
+                React.DOM.label(null, 'Comment'),
+                React.DOM.textarea({placeholder:'Please enter a comment', onChange: this.handleText, value: this.state.text})
+            ];
+
             return React.DOM.form({className: 'comment-form'}, [
-              React.DOM.h2({className: ''}, 'Join the Discussion'),
               React.DOM.div({className: 'comment-form-fields'}, [
-                React.DOM.input({placeholder:'Name', onChange: this.handleName, value: this.state.name})
+                React.DOM.h2({className: 'comment-title'}, 'Join the Discussion'),
+                React.DOM.div({
+                    className: 'comment-button' + (this.state.name && this.state.text ? '' : ' is-comment-button-disabled'),
+                    onClick: this.handleSubmit
+                }, [
+                    React.DOM.span({className: 'far fa-plus-square'}),
+                    React.DOM.span(null, 'Add a Comment')
+                ]),
               ]),
-              React.DOM.div({className: '.comment-form-fields'}, [
-                React.DOM.textarea({placeholder:'Comment', onChange: this.handleText, value: this.state.text}),
-                  React.DOM.div({className:'comment-button', onClick: this.handleSubmit}, 'Add a Comment')
-              ]),
-            ]);
+              React.DOM.div({className: 'comment-form-fields'}, nameNodes),
+              React.DOM.div({className: 'comment-form-fields'}, textNodes),
+            ])
           },
 
           handleName: function(event) {
@@ -198,6 +254,10 @@ html(class="no-js", lang="")
           },
 
           handleSubmit: function() {
+            if (!this.state.name || !this.state.text) {
+              return;
+            }
+
             var comment = {
               name: this.state.name,
               text: this.state.text,
