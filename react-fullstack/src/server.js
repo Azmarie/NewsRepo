@@ -113,6 +113,7 @@ server.get('/comments/:id', (req, res) => {
         var dbo = db.db("news-repo");
         dbo.collection("comments")
            .find({articleId: req.params.id})
+           .sort({publishedAt: -1})
            .toArray(function(err, result) {
              if (err) throw err;
              var comments = result;
