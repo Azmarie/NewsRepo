@@ -7,7 +7,7 @@ html(class="no-js", lang="")
     meta(name="description", description=description)
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
-
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.0.9/css/all.css', integrity='sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1', crossorigin='anonymous')
     style.
       .content {
         margin:25px 0 0px 25px;
@@ -55,17 +55,33 @@ html(class="no-js", lang="")
       }
       .comment-form input, textarea{
         margin-bottom: 0.25rem;
-          border: none;
-          border-bottom: 1px solid #888;
-          font-size: 0.85rem;
-          padding: 0.25rem 0;
-          width: 99%;
-          &:focus {
-            border-bottom-color: #00BDFC;
-            outline: none;
-          }
+        border: none;
+        border-bottom: 1px solid #888;
+        font-size: 0.85rem;
+        padding: 0.25rem 0;
+        width: 99%;
+        &:focus {
+          border-bottom-color: #00BDFC;
+          outline: none;
         }
+      }
 
+      .article-tag {
+        display: inline-block;
+        width: 100px;
+        min-width: 100px;
+        background: #6a8;
+        border-radius: 10px;
+        color: white;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .fas.fa-link {
+        margin-right: 5px;
+        font-size: 20px;
+        color: #6a8;
+      }
     style#css!= css
   body
     #app!= body
@@ -77,6 +93,12 @@ html(class="no-js", lang="")
       ga('create','#{trackingId}','auto');ga('send','pageview')
     script.
         const id = document.getElementById('hidden-info').getAttribute('data-id');
+
+        const extractDomain = function(url) {
+          var rx = /(.+?:\/\/.+?)\//;
+          return rx.exec(url)[0];
+        };
+
         $.get('/detail/' + id, (res) => {
           var date = new Date(res.publishedAt);
           document.title = res.title;
@@ -84,9 +106,19 @@ html(class="no-js", lang="")
           
           React.render(React.DOM.div({className:'content'}, [
             React.DOM.h2({className:'newsTitle'}, res.title),
-            React.DOM.a({href: res.url}, "Read More"),
-            React.DOM.div({className:'article-date'}, dateString),
-            React.DOM.h6({className: 'newsDesc'}, res.description)
+            React.DOM.div(null, [
+              React.DOM.a({href: res.url, className: 'fas fa-link'}),
+              React.DOM.span({className: 'article-date'}, dateString)
+            ]),
+            React.DOM.h5({className: 'newsDesc'}, res.description),
+            (
+              res.source.id === 'hacker-news' ?
+              React.DOM.div({className: 'article-tag'}, res.source.id) :
+              React.DOM.a({
+                className: 'article-tag',
+                href: extractDomain(res.url)
+              }, res.source.id)
+             )
           ]), document.getElementById('article-container'));
         });
 
@@ -166,9 +198,7 @@ html(class="no-js", lang="")
 
           render: function() {
             var comments = this.props.comments.map(function(comment) {
-
-              var date = new Date(parseInt(comment.publishedAt, 10));
-              console.log(date);
+              var date = new Date(comment.publishedAt);
               var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
 
               return React.DOM.div({className: 'comment'}, [
