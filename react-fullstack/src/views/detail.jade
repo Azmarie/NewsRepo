@@ -13,7 +13,32 @@ html(class="no-js", lang="")
         margin:25px 0 0px 25px;
         background-color:#fff;
         padding: 20px;
+        min-height: 500px;
       }
+      
+      .loader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid #6a8;
+        border-bottom: 6px solid #6a8;
+        width: 120px;
+        margin:auto;
+        margin-top:50%;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
       .comment-section {
         color: #333;
         //- background-color: #909090;
@@ -73,7 +98,7 @@ html(class="no-js", lang="")
       }
 
       .comment {
-        border-bottom: 0.125rem solid #999;
+        border-bottom: 1px solid #999;
       }
       .comment-name {
       }
@@ -120,18 +145,34 @@ html(class="no-js", lang="")
         color: lightcoral;
       }
 
-      .article-tag {
+      .article-tag{
+        text-decoration: none;
+        border:solid 1px #6a8;
         display: inline-block;
         width: 100px;
+        padding: 5px;
+        position:relative;
+        top:120px;
+
+        color: #fff;
         min-width: 100px;
         background: #6a8;
-        border-radius: 10px;
-        color: white;
+        border-radius: 20px;
         text-align: center;
         font-size: 14px;
-        font-weight: 400;
+        font-weight: 450;
+
+        background-image: linear-gradient(45deg, #fff, 50%, transparent 50%);
+        background-position: 100%;
+        background-size: 195%;
+        transition: background 500ms ease-in-out;
       }
 
+      .article-tag:hover {
+        color:#6a8;
+        background-position: 0;
+      }
+        
       .fas.fa-link {
         margin-right: 5px;
         font-size: 20px;
@@ -157,32 +198,52 @@ html(class="no-js", lang="")
           var rx = /(.+?:\/\/.+?)\//;
           return rx.exec(url)[0];
         };
-        //show loader
-        //React.render(React.DOM.div(), document.getElementById(''));
+
+        var ArticleSection = React.createClass({
+          displayName: 'ArticleSection',
         
-        $.get('/detail/' + id, (res) => {
-          //hide loader
-          var date = new Date(res.publishedAt);
-          document.title = res.title;
-          var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
-          
-          React.render(React.DOM.div({className:'content'}, [
-            React.DOM.h2({className:'newsTitle'}, res.title),
-            React.DOM.div(null, [
-              React.DOM.a({href: res.url, className: 'fas fa-link'}),
-              React.DOM.span({className: 'article-date'}, dateString)
-            ]),
-            React.DOM.h5({className: 'newsDesc'}, res.description),
-            (
-              res.source.id === 'hacker-news' ?
-              React.DOM.div({className: 'article-tag'}, res.source.id) :
-              React.DOM.a({
-                className: 'article-tag',
-                href: extractDomain(res.url)
-              }, res.source.id)
-             )
-          ]), document.getElementById('article-container'));
+          getInitialState: function() {
+            return {article: null};
+          },
+        
+          render: function() {
+            if (!this.state.article) {
+              return React.DOM.div({className:'content'}, React.DOM.div({className: 'loader'}));
+            }
+        
+            var date = new Date(this.state.article.publishedAt);
+            var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        
+            return React.DOM.div({className:'content'}, [
+              React.DOM.h2({className:'newsTitle'}, this.state.article.title),
+              React.DOM.div(null, [
+                React.DOM.a({href: this.state.article.url, className: 'fas fa-link'}),
+                React.DOM.span({className: 'article-date'}, dateString)
+              ]),
+              React.DOM.h5({className: 'newsDesc'}, this.state.article.description),
+              (
+                this.state.article.source.id === 'hacker-news' ?
+                React.DOM.div({className: 'article-tag'}, this.state.article.source.id) :
+                React.DOM.a({
+                  className: 'article-tag',
+                  href: extractDomain(this.state.article.url)
+                }, this.state.article.source.id)
+              )
+            ]);
+          },
+        
+          componentDidMount: function() {
+            $.get('/detail/' + id, (res) => {
+              document.title = res.title;
+              this.setState({article: res});
+            });
+          },
         });
+
+        React.render(
+          React.createElement(ArticleSection),
+          document.getElementById('article-container')
+        );
 
         var CommentSection = React.createClass({
           displayName: 'CommentSection',
