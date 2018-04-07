@@ -74,4 +74,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   SHELL
 
   config.vm.provision "file", source: "./react-fullstack", destination: "react-fullstack"
+  config.vm.provision :shell, :inline => "cd /home/vagrant/project/react-fullstack && sudo npm start", run: "always"
 end
