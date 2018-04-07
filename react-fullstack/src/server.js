@@ -82,7 +82,7 @@ server.get('/news', (req, res) => {
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("news-repo");
-    dbo.collection("news").find({}).toArray(function(err, result) {
+    dbo.collection("news").find({}).sort({publishedAt: -1}).toArray(function(err, result) {
       if (err) throw err;
       //res.setHeader('Content-Type', 'application/json');
       res.json(result);
