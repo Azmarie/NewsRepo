@@ -15,19 +15,19 @@ html(class="no-js", lang="")
         padding: 20px;
       }
       .comment-section {
-        color: #fff;
-        background-color: #909090;
+        color: #333;
+        //- background-color: #909090;
         border-radius: 0.875rem;
         padding: 0.2rem 1rem 2rem;
       }
       
       .comment-form {
-        color:#333;
-        background-color: #fff;
+        color: #333;
+        border: solid 1px #aaa;
         border-radius: 0.25rem;
-        margin-top: 2rem;
+        padding: 15px;
+        margin-top: 20px;
         margin-bottom: 1rem;
-        padding: 1rem;  
       }
 
       .comment-form input,
@@ -38,14 +38,32 @@ html(class="no-js", lang="")
       .comment-form > div {
         margin-bottom: 15px;
       }
-      
-      .comment-button {
-          background: #6a8;
-          border-color: #333;
 
+      .comment-button  {
+        width: 130px;
+        padding: 10px;
+        margin-top: 20px;
+        background: #fff;
+        border: solid 1px #6a8;
+        color: #6a8;
+        background-image: linear-gradient(45deg, #6a8, 50%, transparent 50%);
+        background-position: 100%;
+        background-size: 200%;
+        transition: background 500ms ease-in-out;
+        cursor: pointer;
+        border-radius: 10px;
+        font-weight: 500;
       }
+
+      .comment-button:hover {
+        color:#fff;
+        
+        
+        background-position: 0;
+      }
+
       .comment {
-        border-bottom: 0.125rem solid #967;
+        border-bottom: 0.125rem solid #999;
       }
       .comment-name {
       }
@@ -166,7 +184,7 @@ html(class="no-js", lang="")
               ]),
               React.DOM.div({className: '.comment-form-fields'}, [
                 React.DOM.textarea({placeholder:'Comment', onChange: this.handleText, value: this.state.text}),
-                React.DOM.div({className:'comment-button', onClick: this.handleSubmit}, 'Post')
+                  React.DOM.div({className:'comment-button', onClick: this.handleSubmit}, 'Add a Comment')
               ]),
             ]);
           },
