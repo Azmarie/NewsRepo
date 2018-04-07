@@ -4,7 +4,6 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import expressJwt from 'express-jwt';
-import expressGraphQL from 'express-graphql';
 import jwt from 'jsonwebtoken';
 import ReactDOM from 'react-dom/server';
 import PrettyError from 'pretty-error';
@@ -20,7 +19,6 @@ const server = global.server = express();
 var NewsAPI = require('newsapi');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
-// var fetchUrl = require('fetch').fetchUrl;
 
 var url = "mongodb://admin:password@ds235239.mlab.com:35239/news-repo";
 var newsapi = new NewsAPI('fca01394a9cc4e05b32d322eac33c1a4');
@@ -52,28 +50,18 @@ server.use(expressJwt({
 }));
 server.use(passport.initialize());
 
-server.get('/login/facebook',
-passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
+server.get(
+  '/login/facebook',
+  passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
 );
 server.get('/login/facebook/return',
-passport.authenticate('facebook', { failureRedirect: '/login', session: false }),
-(req, res) => {
-  const expiresIn = 60 * 60 * 24 * 180; // 180 days
-  const token = jwt.sign(req.user, auth.jwt.secret, { expiresIn });
-  res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
-  res.redirect('/');
-}
+  passport.authenticate('facebook', { failureRedirect: '/login', session: false }), (req, res) => {
+    const expiresIn = 60 * 60 * 24 * 180; // 180 days
+    const token = jwt.sign(req.user, auth.jwt.secret, { expiresIn });
+    res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
+    res.redirect('/');
+  }
 );
-
-//
-// Register API middleware
-// -----------------------------------------------------------------------------
-server.use('/graphql', expressGraphQL(req => ({
-  schema,
-  graphiql: true,
-  rootValue: { request: req },
-  pretty: process.env.NODE_ENV !== 'production',
-})));
 
 //
 // Connect MongoDB
@@ -141,28 +129,22 @@ server.post('/comment', (req, res) => {
 // -----------------------------------------------------------------------------
 
 server.get('/fetch', (req, res) => {
-  console.log('fetching ...');
-  //cron.schedule('* * * * *', function(){
-  console.log('scheduled job running ...');
   newsapi.v2.topHeadlines({
     sources: 'mashable,techcrunch-cn,techcrunch,the-next-web,wired,crypto-coins-news',
     language: 'en'
   }).then(response => {
-    console.log('writing file ...');
     response = response.articles;
     console.log(response);
     MongoClient.connect(url, function(err, db) {
       if (err) throw err;
-      console.log("Database connected!");
       var dbo = db.db("news-repo");
       dbo.collection("news").insertMany(response, function(err, res) {
         if (err) throw err;
-        console.log("news inserted");
       });
       db.close();
     });
   });
-  // console.log('running a task every hour');
+
   res.json({});
 });
 
@@ -172,8 +154,7 @@ server.get('/fetch', (req, res) => {
 server.get('*', async (req, res, next) => {
   try {
     let statusCode = 200;
-    // const template = require('./views/index.jade');
-    const data = { title: '', description: '', css: '', body: '', entry: assets.main.js };
+    const data = { title: '', description: '', css: '', body: '' };
 
     if (process.env.NODE_ENV === 'production') {
       data.trackingId = analytics.google.trackingId;
@@ -198,14 +179,12 @@ server.get('*', async (req, res, next) => {
 
     let template;
     const regex = /^\/article/;
-    // console.log(req.path +" "+ regex.test(req.path));
     if (regex.test(req.path)) {
       template = require('./views/detail.jade');
     } else {
       template = require('./views/index.jade');
     }
 
-    // console.log(req.path);
     res.status(statusCode);
     res.send(template(data));
   } catch (err) {
