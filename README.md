@@ -62,6 +62,9 @@ All data is stored in the database "news-repo", and it contains the following co
 * comments
 * users
 
+### Access to Application
+
+After running via vagrant, the application is accessible from ```http://localhost:3000```.
 
 ## Features
 
@@ -80,7 +83,13 @@ The fetched articles will be stored into the news collection.
 
 ### List Articles Getting Started
 
+The server has an API path ```/news``` for returning all the stored news articles.
+The data from backend server is displayed at ```http://localhost:3000```.
+
 ### Display Article Detail Information
+
+The server has an API path ```/article/:id``` for returning all the information for an article.
+The data from backend server is displayed at ```http://localhost:3000/article/:id```.
 
 ### Login via User Account
 
@@ -90,6 +99,13 @@ The fetched articles will be stored into the news collection.
 
 ### List Article Comments
 
+The server has an API path ```/comments/:id``` for returning all the comments for an article.
+The data from backend server is displayed at ```http://localhost:3000/article/:id```.
+
 ### Link to Original News Article
 
+On the detail article page, there is an link icon to link to the original article.
+
 ### Link to Original News Site
+
+On the detail article page, there is a tag to link to the original site where the aricle originates.
