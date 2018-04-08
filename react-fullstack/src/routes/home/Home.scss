@@ -1,6 +1,191 @@
 @import '../../components/variables.scss';
 
-//general
+//clear
+/** {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+li > a,
+h2 > a,
+h3 > a {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, ul, ol, header, body,
+input[type="button"],
+h1 > a {
+  margin: 0;
+  padding: 0;
+}*/
+
+
+//share
+body {
+  background-color: #f6f6f6;
+}
+
+.title {
+  font-size: 25px;
+  color: #6a8;
+  margin: 0 0 10px;
+}
+
+/*.newsTitle {
+  color: #333;
+}
+
+.newsTitle:hover {
+  color: #6a8;
+}*/
+
+.root {
+  position: relative;
+  width: 80%;
+  //padding: 0 10%;
+  margin: 20px 10% 50px;
+}
+
+.leftpart {
+  width: 62.5%;
+}
+
+/*#mainnews {
+  height: 100%;
+  background-color: #fff;
+}*/
+
+
+.rightpart {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 37.5%; /*37.5*0.8=30*/
+  height: 100%;
+}
+
+.ourinitiatives,
+.aboutus {
+  /*height: 50%;*/
+  margin-left: 30px;
+  padding: 20px 24px;
+  background-color: #fff;
+  margin-bottom: 30px;
+}
+
+/*.hotnews ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+}
+
+.hotnews ol li {
+  margin-left: 1.5em;
+  text-indent: 0.5em;
+  font-weight: bold;
+  color: #6a8;
+}*/
+
+/*.hotnews ol li h3 {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 2.5em;
+}*/
+
+.info {
+  line-height: 2em;
+  margin: 7px 0 15px;
+  font-size: 15px;
+}
+
+/*.aboutus p {
+  margin: 7px 0 15px;
+}*/
+
+.aboutus hr {
+  background-color: #6a8;
+  height: 1.5px;
+  border: 0;
+  margin: 20px auto 15px;
+  width: 77%;
+}
+
+.email {
+  text-align: center;
+}
+
+.email svg {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.email a {
+  color: #6a8;
+  text-decoration: none;
+  font-family: Consolas;
+  letter-spacing: 1.25px;
+}
+
+.email a:hover {
+  color: #a3ccb7;
+}
+
+.copyright {
+  color: #6a8;
+  text-align: center;
+  margin: 18px auto 8px !important;
+}
+
+
+//only home
+/*.newsItem {
+  padding: 20px 24px;
+  border-bottom: 2px solid #f6f6f6;
+}
+
+.newsItem:hover {
+  background-color: #f8f8f8;
+}
+
+.newsItem h2 {
+  max-width: 75%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}*/
+
+/*.newsDesc {
+  line-height: 1.5em;
+  height: 4.5em;
+  overflow: auto;
+  margin: 5px 0 0;
+  color: #777;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*//general
 
 .font{
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -106,4 +291,4 @@ a {
 
 .email a:hover {
   color: #a3ccb7;
-}
+}*/
