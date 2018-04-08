@@ -282,22 +282,33 @@ html(class="no-js", lang="")
 
           render: function() {
             var nameNodes = [
-                React.DOM.label(null, 'Name'),
-                React.DOM.input({placeholder:'Please enter a name', onChange: this.handleName, value: this.state.name})
+              React.DOM.label(null, 'Name'),
+              React.DOM.input({
+                placeholder:'Please enter a name',
+                onChange: this.handleName,
+                tabIndex: 1,
+                value: this.state.name
+              })
             ];
             var textNodes = [
-                React.DOM.label(null, 'Comment'),
-                React.DOM.textarea({placeholder:'Please enter a comment', onChange: this.handleText, value: this.state.text})
+              React.DOM.label(null, 'Comment'),
+                React.DOM.textarea({
+                  placeholder:'Please enter a comment',
+                  onChange: this.handleText,
+                  value: this.state.text,
+                  tabIndex: 2
+                })
             ];
 
             return React.DOM.form({className: 'comment-form'}, [
               React.DOM.div({className: 'comment-form-fields'}, [
                 React.DOM.h2({className: 'comment-title'}, 'Join the Discussion'),
                 React.DOM.div({
-                    className: 'comment-button' + (this.state.name && this.state.text ? '' : ' is-comment-button-disabled'),
-                    onClick: this.handleSubmit
+                  className: 'comment-button' + (this.state.name && this.state.text ? '' : ' is-comment-button-disabled'),
+                  onClick: this.handleSubmit,
+                  tabIndex: 3
                 }, [
-                    React.DOM.span({className: 'far fa-plus-square'}),
+                  React.DOM.span({className: 'far fa-plus-square'}),
                     React.DOM.span(null, 'Add a Comment')
                 ]),
               ]),
