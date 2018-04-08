@@ -4,8 +4,6 @@ import fetch from '../../core/fetch';
 
 export const path = '/';
 export const action = async (state) => {
-  const response = await fetch('/graphql?query={news{title,link,contentSnippet}}');
-  const { data } = await response.json();
   state.context.onSetTitle('NewsRepo');
-  return <Home news={data.news} />;
+  return <Home news={[]} />;
 };
