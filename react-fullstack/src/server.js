@@ -130,7 +130,7 @@ server.post('/comment', (req, res) => {
 
 server.get('/fetch', (req, res) => {
   newsapi.v2.topHeadlines({
-    sources: 'mashable,techcrunch-cn,techcrunch,the-next-web,wired,crypto-coins-news',
+    sources: 'hacker-news,mashable,techcrunch-cn,techcrunch,the-next-web,wired,crypto-coins-news',
     language: 'en'
   }).then(response => {
     response = response.articles;
