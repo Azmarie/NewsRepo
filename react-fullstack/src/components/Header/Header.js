@@ -16,15 +16,14 @@ function Header() {
   return (
     <div className={s.root + ' ' + s.font}>
       <div className={s.container}>
-        <div>
+        <div className={s.titlehoder}>
           <Link className={s.brand} to="/">
             <img src={require('./logo-small.png')} width="225" alt="NewsRepo" />
-            <span className={s.brandTxt}></span>
           </Link>
           <Navigation className={s.nav} />
         </div>
         <div className={s.mainmenu}>
-          <hr />
+          
         </div>
       </div>
     </div>

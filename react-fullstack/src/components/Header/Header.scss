@@ -6,20 +6,36 @@ $brand-color: #fff;
   background-color: #f6f6f6;
 }
 
-.font{
+.font {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.container {
+/*.container {
   margin: 0 auto;
   padding: 20px 0;
   padding-bottom: 0;
   // max-width: $max-content-width;
+}*/
+
+.titlehoder {
+  height: 80px;
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
 }
 
-.brand {
+
+/*.brand {
   // color: color($brand-color lightness(+10%));
   margin-left: 10%;
+}*/
+
+.brand {
+  float: left;
+  display: block;
+  height: 65px;
+  margin-top: 15px;
+  width: 220px;
 }
 
 .brandTxt {
@@ -28,7 +44,14 @@ $brand-color: #fff;
 
 .nav {
   float: right;
-  margin-top: 6px;
+  margin-top: 20px;
+  margin-right: 0 !important;
+}
+
+.nav a {
+  color: rgb(85, 85, 85) !important;
+  font-size: 18px;
+  font-weight: normal;
 }
 
 .mainmenu {
@@ -47,7 +70,7 @@ $brand-color: #fff;
 
 .mainmenu ul {
   text-decoration: none;
-  margin-left:50%;
+  margin-left: 50%;
   list-style-type: none;
   font-size: 17px;
 }

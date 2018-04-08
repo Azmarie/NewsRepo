@@ -49,8 +49,10 @@ body {
   margin: 20px 10% 50px;
 }
 
+
 .leftpart {
   width: 62.5%;
+  float: left;
 }
 
 /*#mainnews {
@@ -58,13 +60,14 @@ body {
   background-color: #fff;
 }*/
 
-
 .rightpart {
-  position: absolute;
+  float: right;
+  width: 37.5%;
+  /*position: absolute;
   top: 0;
   right: 0;
-  width: 37.5%; /*37.5*0.8=30*/
-  height: 100%;
+  width: 37.5%; //37.5*0.8=30
+  height: 100%;*/
 }
 
 .ourinitiatives,
@@ -138,6 +141,11 @@ body {
   color: #6a8;
   text-align: center;
   margin: 18px auto 8px !important;
+}
+
+
+.clear {
+  clear: both;
 }
 
 
