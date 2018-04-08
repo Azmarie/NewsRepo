@@ -1,15 +1,23 @@
 # NewsRepo
 
-Any comments you want to make about the project: what's working, what isn't. Also note any features that you think might be easily missed while marking.
+Not many industries are as dynamic and inviting as the technology industry. IT professional needs to constantly learn new knowledge and stay up-to-date with the trends to be on the edge of productivity. As for technology enthusiasts in general, a go-to platform to grab news and trending topics in the tech field is also in demand to help relieve the burden of spending much time going through numerous of sites. 
 
-## Getting Started
+## Features
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+### Fetch News from Third-Party Sources
 
-### Prerequisites
+### List Articles Getting Started
 
-What things you need to install the software and how to install them
+### Display Article Detail Information
 
-```
-Give examples
-```
+### Login via User Account
+
+### Register New User Account
+
+### Support for Mobile Screens
+
+### List Article Comments
+
+### Link to Original News Article
+
+### Link to Original News Site
