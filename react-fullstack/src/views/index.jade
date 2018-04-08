@@ -9,9 +9,41 @@ html(class="no-js", lang="")
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
 
     style.
+      .loader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid #6a8;
+        border-bottom: 6px solid #6a8;
+        width: 120px;
+        margin:auto;
+        margin-top:25%;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
       .newsItem {
         list-style-type: none;
         height: 100%;
+        background-color: #fff;
+        padding-left: 0;
+        padding: 20px 24px;
+        border-bottom: 2px solid #f6f6f6;
+      }
+      
+      .loaderbg {
+        list-style-type: none;
+        height: 453px;
         background-color: #fff;
         padding-left: 0;
         padding: 20px 24px;
@@ -31,22 +63,62 @@ html(class="no-js", lang="")
       window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
       ga('create','#{trackingId}','auto');ga('send','pageview')
     script.
-        $.getJSON('/news', (res) => {
-            var list = res.filter(function(r) {
-              return (!!r.description);
-            }).map(function(r) {
-              var rid = r._id;
-              var date = new Date(r.publishedAt);
-              var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
-              return React.DOM.li({className: 'newsItem'}, [
-                  React.DOM.a({href: '/article/'+rid}, React.DOM.h2({className: 'newsTitle'}, r.title)),
-                  React.DOM.p({className: 'article-date'}, dateString),
-                  React.DOM.p({className: 'newsDesc'}, r.description),
-                  React.DOM.a({href: '/article/'+rid}, 'Leave a Comment')
-              ]);
-            });
-            React.render(React.DOM.ul({className: ''}, list), document.getElementById('mainnews'));
-        });
+      
+      var MainNews = React.createClass({
+        displayName: 'MainNews',
+      
+        getInitialState: function() {
+          return {articles: []};
+        },
+      
+        render: function() {
+          if (this.state.articles.length === 0) {
+            return React.DOM.div({className:'loaderbg'}, React.DOM.div({className: 'loader'}));
+          }
+          var list = this.state.articles.filter(function(r) {
+            return (!!r.description);
+          }).map(function(r) {
+            var rid = r._id;
+            var date = new Date(r.publishedAt);
+            var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+            return React.DOM.li({className: 'newsItem'}, [
+                React.DOM.a({href: '/article/'+rid}, React.DOM.h2({className: 'newsTitle'}, r.title)),
+                React.DOM.p({className: 'article-date'}, dateString),
+                React.DOM.p({className: 'newsDesc'}, r.description),
+                React.DOM.a({href: '/article/'+rid}, 'Leave a Comment')
+            ]);
+          });
+          return React.DOM.ul(null, list);
+        },
+      
+        componentDidMount: function() {
+          $.getJSON('/news', (res) => {
+            this.setState({articles: res});
+          });
+        },
+      });
+      
+      React.render(
+        React.createElement(MainNews),
+        document.getElementById('mainnews')
+      );
+
+        //- $.getJSON('/news', (res) => {
+        //-     var list = res.filter(function(r) {
+        //-       return (!!r.description);
+        //-     }).map(function(r) {
+        //-       var rid = r._id;
+        //-       var date = new Date(r.publishedAt);
+        //-       var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        //-       return React.DOM.li({className: 'newsItem'}, [
+        //-           React.DOM.a({href: '/article/'+rid}, React.DOM.h2({className: 'newsTitle'}, r.title)),
+        //-           React.DOM.p({className: 'article-date'}, dateString),
+        //-           React.DOM.p({className: 'newsDesc'}, r.description),
+        //-           React.DOM.a({href: '/article/'+rid}, 'Leave a Comment')
+        //-       ]);
+        //-     });
+        //-     React.render(React.DOM.ul({className: ''}, list), document.getElementById('mainnews'));
+        //- });
 
     if trackingId
       script(src="https://www.google-analytics.com/analytics.js", async=true, defer=true)
