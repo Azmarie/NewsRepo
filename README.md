@@ -91,11 +91,9 @@ The data from backend server is displayed at ```http://localhost:3000```.
 The server has an API path ```/article/:id``` for returning all the information for an article.
 The data from backend server is displayed at ```http://localhost:3000/article/:id```.
 
-### Login via User Account
-
-### Register New User Account
-
 ### Support for Mobile Screens
+
+The home page at ```http://localhost:3000``` is mobile-friendly and resizes reactively based on the screen resolutions.
 
 ### List Article Comments
 
