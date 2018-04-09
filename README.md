@@ -60,7 +60,6 @@ This application uses the [Mongo Lab](https://mlab.com) for the Mongo Database.
 All data is stored in the database "news-repo", and it contains the following collections,
 * news
 * comments
-* users
 
 ### Access to Application
 
