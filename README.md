@@ -121,6 +121,6 @@ The home page at ```http://localhost:3000``` is mobile-friendly and resizes reac
 
 
 ## Reference
-*React Starter Kit (https://www.reactstarterkit.com/)
-*News API (https://newsapi.org/)
-*cors-anywhere(https://cors-anywhere.herokuapp.com/)
+* React Starter Kit (https://www.reactstarterkit.com/)
+* News API (https://newsapi.org/)
+* cors-anywhere(https://cors-anywhere.herokuapp.com/)
