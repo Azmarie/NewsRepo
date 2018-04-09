@@ -210,7 +210,7 @@ html(class="no-js", lang="")
             if (!this.state.article) {
               return React.DOM.div({className:'content'}, React.DOM.div({className: 'loader'}));
             }
-        
+
             var date = new Date(this.state.article.publishedAt);
             var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
 
