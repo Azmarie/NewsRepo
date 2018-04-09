@@ -90,10 +90,6 @@ The data from backend server is displayed at ```http://localhost:3000```.
 The server has an API path ```/article/:id``` for returning all the information for an article.
 The data from backend server is displayed at ```http://localhost:3000/article/:id```.
 
-### Support for Mobile Screens
-
-The home page at ```http://localhost:3000``` is mobile-friendly and resizes reactively based on the screen resolutions.
-
 ### List Article Comments
 
 The server has an API path ```/comments/:id``` for returning all the comments for an article.
@@ -106,3 +102,12 @@ On the detail article page, there is an link icon to link to the original articl
 ### Link to Original News Site
 
 On the detail article page, there is a tag to link to the original site where the aricle originates.
+
+### Add Comment to News Article
+
+The server has an API path ```/comment``` for adding a comment for an article.
+On the detail article page, there is a form for adding new comments to an news article.
+
+### Support for Mobile Screens
+
+The home page at ```http://localhost:3000``` is mobile-friendly and resizes reactively based on the screen resolutions.
