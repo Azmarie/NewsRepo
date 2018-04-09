@@ -126,4 +126,4 @@ The home page at ```http://localhost:3000``` is mobile-friendly and resizes reac
 * News API (https://newsapi.org/)
 * cors-anywhere (https://cors-anywhere.herokuapp.com/)
 * Vagrant (https://www.vagrantup.com/)
-* Comment System Example (https://github.com/ijason/NodeJS-Mongoose)
+* Comment System Example (https://github.com/ijason/NodeJS-Mongoose) (http://www.coding4developers.com/node-js/realtime-commenting-system-with-node-and-mongodb-realtime-commenting-on-post-using-node-js-and-socket-io/)
