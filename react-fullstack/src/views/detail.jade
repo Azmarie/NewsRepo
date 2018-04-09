@@ -213,7 +213,45 @@ html(class="no-js", lang="")
         
             var date = new Date(this.state.article.publishedAt);
             var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
-        
+
+            $.ajaxPrefilter(function (options) {
+              if (jQuery.support.cors && options.crossDomain) {
+                options.url = (window.location.protocol === 'http:' ? 'http:' : 'https:') + '//cors-anywhere.herokuapp.com/' + options.url; //cors.corsproxy.io/url=
+              }
+            });
+
+            $.get(
+              this.state.article.url,
+              function (response) {
+                var xmlDoc = $.parseHTML(response),
+                    xml = $(xmlDoc);
+
+                var list = [".article-content",
+                    ".post",
+                    ".dropcap",
+                    ".body-text",
+                    ".story-body",
+                    ".entry-content",
+                    "#body-copy",
+                    "article",
+                    ".content-mash-video",
+                    "#root"];
+
+                var bodyall;
+                for (var i=0;i<list.length;++i) {
+                  var tmpbodyall = $(xml).find(list[i]);
+                  bodyall = tmpbodyall.html();
+                  if (bodyall!=null)
+                    break;
+                }
+                console.log("> ", bodyall);
+                if (bodyall!=null)
+                  $(".newsDesc").html(bodyall);
+                else
+                  $(".newsDesc").html($(".newsDesc").text() + '<br/><strong>The original post may have been removed or changed, please refer to the original link. <br/>Thank you!</strong>');
+              }
+            );
+
             return React.DOM.div({className:'content'}, [
               React.DOM.h2({className:'newsTitle'}, this.state.article.title),
               React.DOM.div(null, [
@@ -369,6 +407,7 @@ html(class="no-js", lang="")
           {className: 'content'},
           React.createElement(CommentSection)
         ), document.getElementById('comment-container'));
+       
 
     if trackingId
       script(src="https://www.google-analytics.com/analytics.js", async=true, defer=true)
