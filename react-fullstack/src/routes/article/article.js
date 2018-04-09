@@ -9,16 +9,11 @@ class Article extends Component {
   render() {
     return (
       <div className={s.root} id='article'>
-      <Grid>
-        <Row className="show-grid">
-          <Col xs={6} md={4}>
+
             <div id='article-container'></div>
-          </Col>
-          <Col xs={12} md={8}>
+      
             <div id='comment-container'></div>
-          </Col>
-        </Row>
-      </Grid>
+          
         <div id='hidden-info'
              className={s.noshow}
              data-id={this.props.articleId}>

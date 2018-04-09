@@ -10,10 +10,17 @@ html(class="no-js", lang="")
     link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.0.9/css/all.css', integrity='sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1', crossorigin='anonymous')
     style.
       .content {
-        margin:25px 0 0px 25px;
+        margin:25px 0 0;
         background-color:#fff;
-        padding: 20px;
-        min-height: 500px;
+        padding: 20px 50px;
+        //min-height: 500px;
+      }
+
+      .errorfetch {
+        margin:20px 0;
+        font-weight:bold;
+        font-size:20px;
+        text-align:center;
       }
       
       .loader {
@@ -151,8 +158,6 @@ html(class="no-js", lang="")
         display: inline-block;
         width: 100px;
         padding: 5px;
-        position:relative;
-        top:120px;
 
         color: #fff;
         min-width: 100px;
@@ -248,9 +253,11 @@ html(class="no-js", lang="")
                 if (bodyall!=null)
                   $(".newsDesc").html(bodyall);
                 else
-                  $(".newsDesc").html($(".newsDesc").text() + '<br/><strong>The original post may have been removed or changed, please refer to the original link. <br/>Thank you!</strong>');
-              }
-            );
+                  $(".newsDesc").after('<p class="errorfetch">The original post may have been removed or changed, please refer to the original link. <br/>Thank you!</p>');
+              })
+              .fail(function() {
+                $(".newsDesc").after('<p class="errorfetch">The original post may have been removed or changed, please refer to the original link. <br/>Thank you!</p>');
+              });
 
             return React.DOM.div({className:'content'}, [
               React.DOM.h2({className:'newsTitle'}, this.state.article.title),
