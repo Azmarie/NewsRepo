@@ -1,0 +1,420 @@
+doctype html
+html(class="no-js", lang="")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="x-ua-compatible", content="ie=edge")
+    title= title
+    meta(name="description", description=description)
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.0.9/css/all.css', integrity='sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1', crossorigin='anonymous')
+    style.
+      .content {
+        margin:25px 0 0;
+        background-color:#fff;
+        padding: 20px 50px;
+        //min-height: 500px;
+      }
+
+      .errorfetch {
+        margin:20px 0;
+        font-weight:bold;
+        font-size:20px;
+        text-align:center;
+      }
+      
+      .loader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid #6a8;
+        border-bottom: 6px solid #6a8;
+        width: 120px;
+        margin:auto;
+        margin-top:50%;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      .comment-section {
+        color: #333;
+        //- background-color: #909090;
+        border-radius: 0.875rem;
+        padding: 0.2rem 1rem 2rem;
+      }
+      
+      .comment-form {
+        color: #333;
+        border: solid 1px #aaa;
+        border-radius: 0.25rem;
+        padding: 15px;
+        margin-top: 20px;
+        margin-bottom: 1rem;
+      }
+
+      .comment-form input,
+      .comment-form textarea {
+        display: block;
+      }
+
+      .comment-form > div {
+        margin-bottom: 15px;
+      }
+
+      .comment-button  {
+        width: 150px;
+        padding: 10px;
+        margin-top: 20px;
+        background: #fff;
+        border: solid 1px #6a8;
+        color: #6a8;
+        background-image: linear-gradient(45deg, #6a8, 50%, transparent 50%);
+        background-position: 100%;
+        background-size: 200%;
+        transition: background 500ms ease-in-out;
+        cursor: pointer;
+        border-radius: 10px;
+        font-weight: 500;
+      }
+
+      .comment-button-disabled {
+        border: solid 1px #999;
+        color: #999;
+      }
+
+      .comment-button:not(.is-comment-button-disabled):hover {
+        color:#fff;
+        background-position: 0;
+      }
+
+      .comment-button.is-comment-button-disabled {
+        color: lightgray;
+        cursor: not-allowed;
+        border: solid 1px lightgray;
+        background-image: initial;
+      }
+
+      .comment {
+        border-bottom: 1px solid #999;
+      }
+      .comment-name {
+      }
+      .comment-text {
+        font-style: italic;
+        margin-left: 1rem;
+      }
+      .comment-form input, textarea{
+        margin-bottom: 0.25rem;
+        border: none;
+        border-bottom: 1px solid #888;
+        font-size: 0.85rem;
+        padding: 0.25rem 0;
+        width: 99%;
+        &:focus {
+          border-bottom-color: #00BDFC;
+          outline: none;
+        }
+      }
+
+      .comment-form .comment-form-fields {
+        position: relative;
+      }
+
+      .comment-form .comment-form-fields:first-child {
+        margin-bottom: 40px;
+      }
+
+      .comment-form .comment-form-fields:nth-child(2) {
+        margin-bottom: 20px;
+      }
+
+      .comment-title,
+      .comment-button {
+        display: inline-block;
+      }
+
+      .comment-button {
+        float: right;
+      }
+
+      .comment-error {
+        position: absolute;
+        color: lightcoral;
+      }
+
+      .article-tag{
+        text-decoration: none;
+        border:solid 1px #6a8;
+        display: inline-block;
+        width: 100px;
+        padding: 5px;
+
+        color: #fff;
+        min-width: 100px;
+        background: #6a8;
+        border-radius: 20px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 450;
+
+        background-image: linear-gradient(45deg, #fff, 50%, transparent 50%);
+        background-position: 100%;
+        background-size: 195%;
+        transition: background 500ms ease-in-out;
+      }
+
+      .article-tag:hover {
+        color:#6a8;
+        background-position: 0;
+      }
+        
+      .fas.fa-link {
+        margin-right: 5px;
+        font-size: 20px;
+        color: #6a8;
+      }
+
+      .far.fa-plus-square {
+        margin-right: 8px;
+      }
+    style#css!= css
+  body
+    #app!= body
+    script(src=entry)
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.js")
+    script.
+      window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+      ga('create','#{trackingId}','auto');ga('send','pageview')
+    script.
+        const id = document.getElementById('hidden-info').getAttribute('data-id');
+
+        const extractDomain = function(url) {
+          var rx = /(.+?:\/\/.+?)\//;
+          return rx.exec(url)[0];
+        };
+
+        var ArticleSection = React.createClass({
+          displayName: 'ArticleSection',
+        
+          getInitialState: function() {
+            return {article: null};
+          },
+        
+          render: function() {
+            if (!this.state.article) {
+              return React.DOM.div({className:'content'}, React.DOM.div({className: 'loader'}));
+            }
+
+            var date = new Date(this.state.article.publishedAt);
+            var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+
+            $.ajaxPrefilter(function (options) {
+              if (jQuery.support.cors && options.crossDomain) {
+                options.url = (window.location.protocol === 'http:' ? 'http:' : 'https:') + '//cors-anywhere.herokuapp.com/' + options.url; //cors.corsproxy.io/url=
+              }
+            });
+
+            $.get(
+              this.state.article.url,
+              function (response) {
+                var xmlDoc = $.parseHTML(response),
+                    xml = $(xmlDoc);
+
+                var list = [".article-content",
+                    ".post",
+                    ".dropcap",
+                    ".body-text",
+                    ".story-body",
+                    ".entry-content",
+                    "#body-copy",
+                    "article",
+                    ".content-mash-video",
+                    "#root"];
+
+                var bodyall;
+                for (var i=0;i<list.length;++i) {
+                  var tmpbodyall = $(xml).find(list[i]);
+                  bodyall = tmpbodyall.html();
+                  if (bodyall!=null)
+                    break;
+                }
+                console.log("> ", bodyall);
+                if (bodyall!=null)
+                  $(".newsDesc").html(bodyall);
+                else
+                  $(".newsDesc").after('<p class="errorfetch">The original post may have been removed or changed, please refer to the original link. <br/>Thank you!</p>');
+              })
+              .fail(function() {
+                $(".newsDesc").after('<p class="errorfetch">The original post may have been removed or changed, please refer to the original link. <br/>Thank you!</p>');
+              });
+
+            return React.DOM.div({className:'content'}, [
+              React.DOM.h2({className:'newsTitle'}, this.state.article.title),
+              React.DOM.div(null, [
+                React.DOM.a({href: this.state.article.url, className: 'fas fa-link'}),
+                React.DOM.span({className: 'article-date'}, dateString)
+              ]),
+              React.DOM.h5({className: 'newsDesc'}, this.state.article.description),
+              (
+                this.state.article.source.id === 'hacker-news' ?
+                React.DOM.div({className: 'article-tag'}, this.state.article.source.id) :
+                React.DOM.a({
+                  className: 'article-tag',
+                  href: extractDomain(this.state.article.url)
+                }, this.state.article.source.id)
+              )
+            ]);
+          },
+        
+          componentDidMount: function() {
+            $.get('/detail/' + id, (res) => {
+              document.title = res.title;
+              this.setState({article: res});
+            });
+          },
+        });
+
+        React.render(
+          React.createElement(ArticleSection),
+          document.getElementById('article-container')
+        );
+
+        var CommentSection = React.createClass({
+          displayName: 'CommentSection',
+
+          getInitialState: function() {
+            return {comments: []};
+          },
+
+          render: function() {
+            return React.DOM.div({className: 'comment-section'}, [
+              React.createElement(CommentForm, {addComment: this.addComment}),
+              React.createElement(CommentList, {comments: this.state.comments})
+            ]);
+          },
+
+          componentDidMount: function() {
+            $.get('/comments/' + id, function(response) {
+              this.setState({comments: response});
+            }.bind(this));
+          },
+          
+          addComment: function(comment) {
+            var comments = this.state.comments.slice();
+            comments.unshift(comment);
+
+            this.setState({comments: comments});
+          }
+        });
+
+        var CommentForm = React.createClass({
+          displayName: 'CommentForm',
+
+          getInitialState: function() {
+            return {name: '', text: ''};
+          },
+
+          render: function() {
+            var nameNodes = [
+              React.DOM.label(null, 'Name'),
+              React.DOM.input({
+                placeholder:'Please enter a name',
+                onChange: this.handleName,
+                tabIndex: 1,
+                value: this.state.name
+              })
+            ];
+            var textNodes = [
+              React.DOM.label(null, 'Comment'),
+                React.DOM.textarea({
+                  placeholder:'Please enter a comment',
+                  onChange: this.handleText,
+                  value: this.state.text,
+                  tabIndex: 2
+                })
+            ];
+
+            return React.DOM.form({className: 'comment-form'}, [
+              React.DOM.div({className: 'comment-form-fields'}, [
+                React.DOM.h2({className: 'comment-title'}, 'Join the Discussion'),
+                React.DOM.div({
+                  className: 'comment-button' + (this.state.name && this.state.text ? '' : ' is-comment-button-disabled'),
+                  onClick: this.handleSubmit,
+                  tabIndex: 3
+                }, [
+                  React.DOM.span({className: 'far fa-plus-square'}),
+                    React.DOM.span(null, 'Add a Comment')
+                ]),
+              ]),
+              React.DOM.div({className: 'comment-form-fields'}, nameNodes),
+              React.DOM.div({className: 'comment-form-fields'}, textNodes),
+            ])
+          },
+
+          handleName: function(event) {
+            this.setState({name: event.target.value});
+          },
+
+          handleText: function(event) {
+            this.setState({text: event.target.value});
+          },
+
+          handleSubmit: function() {
+            if (!this.state.name || !this.state.text) {
+              return;
+            }
+
+            var comment = {
+              name: this.state.name,
+              text: this.state.text,
+              articleId: id,
+              publishedAt: (new Date()).toISOString()
+            };
+
+            $.post('/comment', comment, function() {
+              this.setState({name: '', text: ''});
+              this.props.addComment(comment);
+            }.bind(this));
+          }
+        });
+
+        var CommentList = React.createClass({
+          displayName: 'CommentList',
+
+          render: function() {
+            var comments = this.props.comments.map(function(comment) {
+              var date = new Date(comment.publishedAt);
+              var dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+
+              return React.DOM.div({className: 'comment'}, [
+                React.DOM.div(null, [
+                  React.DOM.h4({className:'comment-name'}, comment.name),
+                  React.DOM.p({className:'date'}, dateString),
+                  React.DOM.h5({className:'comment-text'}, comment.text)
+                ]),
+              ]);
+            });
+
+            return React.DOM.div({className: 'comment-box'}, comments);
+          }
+        });
+
+        React.render(React.DOM.div(
+          {className: 'content'},
+          React.createElement(CommentSection)
+        ), document.getElementById('comment-container'));
+       
+
+    if trackingId
+      script(src="https://www.google-analytics.com/analytics.js", async=true, defer=true)

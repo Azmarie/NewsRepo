@@ -1,0 +1,117 @@
+@import '../variables.scss';
+
+$brand-color: #fff;
+
+.root {
+  background-color: #f6f6f6;
+}
+
+.font {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/*.container {
+  margin: 0 auto;
+  padding: 20px 0;
+  padding-bottom: 0;
+  // max-width: $max-content-width;
+}*/
+
+.titlehoder {
+  height: 80px;
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
+}
+
+
+/*.brand {
+  // color: color($brand-color lightness(+10%));
+  margin-left: 10%;
+}*/
+
+.brand {
+  float: left;
+  display: block;
+  height: 65px;
+  margin-top: 15px;
+  width: 220px;
+}
+
+.brandTxt {
+  margin-left: 10px;
+}
+
+.nav {
+  float: right;
+  margin-top: 20px;
+  margin-right: 0 !important;
+}
+
+.nav a {
+  color: rgb(85, 85, 85) !important;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.mainmenu {
+  background-color: #6a8;
+  margin-top: 10px;
+  height: 50px;
+  width: 100%;
+}
+
+.link {
+  display: inline-block;
+  padding: 3px 8px;
+  text-decoration: none;
+  font-size: 1.125em; /* ~18px */
+}
+
+.mainmenu ul {
+  text-decoration: none;
+  margin-left: 50%;
+  list-style-type: none;
+  font-size: 17px;
+}
+
+.mainmenu ul li {
+  border-right: 1px solid #a3ccb7;
+  float: left;
+}
+
+.mainmenu ul li:first-child {
+  border-left: 1px solid #a3ccb7;
+}
+
+.mainmenu ul li a {
+  text-decoration: none;
+  color: #fff;
+  padding: 0 20px;
+  display: block;
+  height: 50px;
+  line-height: 50px;
+}
+
+.mainmenu ul li a:hover {
+  background-color: #a3ccb7;
+}
+
+.banner {
+  text-align: center;
+}
+
+.bannerTitle {
+  margin: 0;
+  padding: 10px;
+  font-weight: normal;
+  font-size: 4em;
+  line-height: 1em;
+}
+
+.bannerDesc {
+  padding: 0;
+  color: rgba(255, 255, 255, .5);
+  font-size: 1.25em;
+  margin: 0;
+}

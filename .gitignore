@@ -1,0 +1,7 @@
+.vagrant/
+tmp/
+
+.DS_Store
+react-fullstack/build
+react-fullstack/node_modules
+react-fullstack/src/server/node_modules
