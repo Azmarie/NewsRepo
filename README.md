@@ -1,3 +1,4 @@
+<img src="../react-fullstack/src/public/logo-full-128.png" width="300px">
 # NewsRepo
 
 Not many industries are as dynamic and inviting as the technology industry. IT professional needs to constantly learn new knowledge and stay up-to-date with the trends to be on the edge of productivity. As for technology enthusiasts in general, a go-to platform to grab news and trending topics in the tech field is also in demand to help relieve the burden of spending much time going through numerous of sites. 
@@ -95,10 +96,6 @@ The data from backend server is displayed at ```http://localhost:3000```.
 The server has an API path ```/article/:id``` for returning all the information for an article.
 The data from backend server is displayed at ```http://localhost:3000/article/:id```.
 
-### List Article Comments
-
-The server has an API path ```/comments/:id``` for returning all the comments for an article.
-The data from backend server is displayed at ```http://localhost:3000/article/:id```.
 
 ### Link to Original News Article
 
@@ -112,6 +109,11 @@ On the detail article page, there is a tag to link to the original site where th
 
 The server has an API path ```/comment``` for adding a comment for an article.
 On the detail article page, there is a form for adding new comments to an news article.
+
+### List Article Comments
+
+The server has an API path ```/comments/:id``` for returning all the comments for an article.
+The data from backend server is displayed at ```http://localhost:3000/article/:id```.
 
 ### Support for Mobile Screens
 
