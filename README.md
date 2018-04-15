@@ -1,5 +1,4 @@
 <img src="./src/public/logo-full-128.png" width="300px">
-# NewsRepo
 
 Not many industries are as dynamic and inviting as the technology industry. IT professional needs to constantly learn new knowledge and stay up-to-date with the trends to be on the edge of productivity. As for technology enthusiasts in general, a go-to platform to grab news and trending topics in the tech field is also in demand to help relieve the burden of spending much time going through numerous of sites.
 
@@ -7,57 +6,13 @@ Not many industries are as dynamic and inviting as the technology industry. IT p
 
 In order to run the application, please ensure a vagrant has been setup.
 
-```
-$: vagrant up
-Bringing machine 'default' up with 'virtualbox' provider...
-==> default: Checking if box 'ubuntu/xenial64' is up to date...
-==> default: A newer version of the box 'ubuntu/xenial64' for provider 'virtualbox' is
-==> default: available! You currently have version '20180316.0.0'. The latest is version
-==> default: '20180406.0.0'. Run `vagrant box update` to update.
-==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
-==> default: flag to force provisioning. Provisioners marked to run always will still run.
-==> default: Running provisioner: shell...
-    default: Running: inline script
-    default:
-    default: > @ clean /home/vagrant/project/react-fullstack
-    default: > babel-node tools/run clean
-    default: [04:27:29] Starting 'clean'...
-    default: [04:27:29] Finished 'clean' after 55 ms
-    default:
-    default: > @ start /home/vagrant/project/react-fullstack
-    default: > babel-node tools/run start
-    default: [20:21:19] Starting 'start'...
-    default: [20:21:19] Starting 'clean'...
-    default: [20:21:19] Finished 'clean' after 43 ms
-    default: [20:21:19] Starting 'bound copy'...
-    default: build/package.json
-    default: [20:21:20] Finished 'bound copy' after 241 ms
-    default: webpack built c68d3ed53bcb44b27be2 in 32958ms
-    default: Child
-    default:     Time: 32958ms
-    default:                            Asset     Size  Chunks             Chunk Names
-    default:     main.js?c68d3ed53bcb44b27be2  6.21 MB       0  [emitted]  main
-    default: Child
-    default:     Time: 30050ms
-    default:             Asset    Size  Chunks             Chunk Names
-    default:         server.js  381 kB       0  [emitted]  main
-    default:     server.js.map  423 kB       0  [emitted]  main
-    default: webpack: bundle is now VALID.
-    default: [20:22:10] The server is running at http://localhost:3000/
-    default: [Browsersync] Proxying: http://localhost:3000
-    default: [Browsersync] Access URLs:
-    default:  ----------------------------------
-    default:        Local: http://localhost:3001
-    default:     External: http://10.0.2.15:3001
-    default:  ----------------------------------
-    default:           UI: http://localhost:3002
-    default:  UI External: http://10.0.2.15:3002
-    default:  ----------------------------------
-    default: [Browsersync] Watching files...
-    default: [20:22:11] Finished 'start' after 51329 ms
-    default: [Browsersync] Couldn't open browser (if you are using BrowserSync in a headless environment, you might want to set the open option to false)
-    default: [Browsersync] Reloading Browsers... (buffered 3 events)
-```
+### `npm start`
+
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+Reload after editing code.<br>
+Lint of errors will be shown in the console.
 
 ### Mongo Database
 
@@ -119,11 +74,14 @@ The data from backend server is displayed at ```http://localhost:3000/article/:i
 
 The home page at ```http://localhost:3000``` is mobile-friendly and resizes reactively based on the screen resolutions.
 
+## Contributor
+* Azmarie Wang
+* April Qin
+* Jerome Lu
+* Ray Wang
 
 ## Reference
 * Yeoman generator for React.js projects (https://www.npmjs.com/package/generator-react-fullstack)
 * React Starter Kit (https://www.reactstarterkit.com/)
 * News API (https://newsapi.org/)
 * cors-anywhere (https://cors-anywhere.herokuapp.com/)
-* Vagrant (https://www.vagrantup.com/)
-* Comment System Example (https://github.com/ijason/NodeJS-Mongoose) (http://www.coding4developers.com/node-js/realtime-commenting-system-with-node-and-mongodb-realtime-commenting-on-post-using-node-js-and-socket-io/)
